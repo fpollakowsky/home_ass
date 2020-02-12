@@ -4,7 +4,6 @@ import 'package:home_ass/pages/bottom-bar//dashboard.dart';
 import 'package:home_ass/pages/bottom-bar/settings.dart';
 import 'package:home_ass/pages/bottom-bar/statistics.dart';
 import 'package:home_ass/utils/res/colors.dart';
-import 'package:home_ass/utils/res/styles.dart';
 
 void main() => runApp(MyApp());
 

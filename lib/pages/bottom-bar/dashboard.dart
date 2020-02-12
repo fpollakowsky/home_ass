@@ -255,7 +255,7 @@ class DashboardIndex extends StatelessWidget {
                                           child: Column(
                                             crossAxisAlignment: CrossAxisAlignment.start,
                                             children: <Widget>[
-                                              Image(image: AssetImage("lib/assets/dining-table-with-chairs.png"),color: Colors.white,),
+                                              Image(image: AssetImage("lib/assets/diningRoom.png"),color: Colors.white,),
                                               Expanded(
                                                 child: Container(
                                                   alignment: Alignment.bottomLeft,
@@ -286,99 +286,6 @@ class DashboardIndex extends StatelessWidget {
                           ],
                         ),
                       )
-                      /* Container(
-                        margin: EdgeInsets.only(top: 16),
-                        child: Row(
-                          children: <Widget>[
-                            Expanded(
-                                child: Container(
-                                  height: 150,
-                                  margin: EdgeInsets.only(right: 8),
-                                  child: Material(
-                                    color: primaryColor,
-                                    borderRadius: BorderRadius.all(Radius.circular(24)),
-                                    child: InkWell(
-                                        onTap: () => print("Container pressed"),
-                                        borderRadius: BorderRadius.all(Radius.circular(24)),
-                                        child: Container(
-                                          padding: EdgeInsets.all(16),
-                                          child: Column(
-                                            crossAxisAlignment: CrossAxisAlignment.start,
-                                            children: <Widget>[
-                                              Image(image: AssetImage("lib/assets/bathroom.png"),),
-                                              Expanded(
-                                                child: Container(
-                                                  alignment: Alignment.bottomLeft,
-                                                  margin: EdgeInsets.only(top: 32),
-                                                  child: Text(
-                                                    "Bathroom",
-                                                    style: TextStyle(
-                                                        color: Colors.white,
-                                                        fontWeight: FontWeight.bold,
-                                                        fontSize: 22
-                                                    ),
-                                                  ),
-                                                ),
-                                              ),
-                                              Text(
-                                                "1 Device",
-                                                style: TextStyle(
-                                                    color: Colors.grey
-                                                ),
-                                              )
-                                            ],
-                                          ),
-                                        )
-                                    ),
-                                  ),
-                                )
-                            ),
-                            Expanded(
-                                child: Container(
-                                  height: 150,
-                                  margin: EdgeInsets.only(left: 8),
-                                  child: Material(
-                                    color: primaryColor,
-                                    borderRadius: BorderRadius.all(Radius.circular(24)),
-                                    child: InkWell(
-                                        onTap: () => print("Container pressed"),
-                                        borderRadius: BorderRadius.all(Radius.circular(24)),
-                                        child: Container(
-                                          padding: EdgeInsets.all(16),
-                                          child: Column(
-                                            crossAxisAlignment: CrossAxisAlignment.start,
-                                            children: <Widget>[
-                                              Image(image: AssetImage("lib/assets/bathroom.png"),),
-                                              Expanded(
-                                                child: Container(
-                                                  alignment: Alignment.bottomLeft,
-                                                  margin: EdgeInsets.only(top: 32),
-                                                  child: Text(
-                                                    "Bathroom",
-                                                    style: TextStyle(
-                                                        color: Colors.white,
-                                                        fontWeight: FontWeight.bold,
-                                                        fontSize: 22
-                                                    ),
-                                                  ),
-                                                ),
-                                              ),
-                                              Text(
-                                                "1 Device",
-                                                style: TextStyle(
-                                                    color: Colors.grey
-                                                ),
-                                              )
-                                            ],
-                                          ),
-                                        )
-                                    ),
-                                  ),
-                                )
-                            ),
-                          ],
-                        ),
-                      )*/
                     ],
                   ),
                 )

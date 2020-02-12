@@ -1,10 +1,13 @@
 import 'package:home_ass/utils/mysql/initMySQL.dart';
 
-getWidgetsData()async{
+getWidgetsData(int id)async{
   var conn = connectMySQL();
-  var result = await conn.query('SELECT * FROM  WHERE id=') ;
+  var result = await conn.query('SELECT * FROM widgets WHERE id= ?', [id]) ;
   for (var row in result) {
-    print('content: ${row[0]}, idFrom: ${row[1]}, idTo: ${row[2]}, type: ${row[3]}, timestamp: ${row[4]}');
+    var id= row[0];
+    var name= row[1];
+    var icon= row[2];
+    var devices= row[3];
   }
   await conn.close();
 }
