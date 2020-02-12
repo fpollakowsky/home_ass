@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:home_ass/pages/bottom-bar//dashboard.dart';
 import 'package:home_ass/pages/bottom-bar/settings.dart';
 import 'package:home_ass/pages/bottom-bar/statistics.dart';
@@ -23,7 +24,6 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage>
   with SingleTickerProviderStateMixin {
-
   TabController _tabController;
   static ScrollController _scrollViewController;
   int _selectedIndex = 0;
@@ -75,8 +75,11 @@ class _MyHomePageState extends State<MyHomePage>
         selectedItemColor: primaryColor,
         onTap: _onItemTapped,
       ),
-      body: SafeArea(
-        child: _widgetOptions.elementAt(_selectedIndex),
+      body: Container(
+        color: Colors.white,
+        child: SafeArea(
+          child: _widgetOptions.elementAt(_selectedIndex),
+        )
       )
     );
   }
