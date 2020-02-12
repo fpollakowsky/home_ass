@@ -1,8 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:home_ass/main.dart';
+import 'package:home_ass/splashScreen.dart';
 import 'package:home_ass/utils/res/colors.dart';
+
+import 'pages/home.dart';
 
 void main() => runApp(OnBoard());
 
@@ -11,6 +13,7 @@ class OnBoard extends StatelessWidget {
   Widget build(BuildContext context) {
     SystemChrome.setEnabledSystemUIOverlays([]);
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
         fontFamily: 'Roboto',
       ),
