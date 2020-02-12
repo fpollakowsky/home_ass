@@ -1,10 +1,27 @@
+import 'dart:math';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:home_ass/utils/res/colors.dart';
 
-class DashboardIndex extends StatelessWidget {
+class DashboardIndex extends StatefulWidget{
+  @override
+  _DashboardIndex createState() => _DashboardIndex();
+}
+
+class _DashboardIndex extends State<DashboardIndex> {
+  var random =Random();
+  var restaurants=['Restaurant 1','Restaurant 2','Restaurant 3','Restaurant 4','Restaurant 5'];
+  int index = 0;
+  String restaurantName;
+
+  @override
+  void initState(){
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
+    restaurantName = restaurants[index];
     return Container(
       padding: EdgeInsets.only(top: 16, left: 16, right: 16),
       child: Column(
@@ -107,7 +124,7 @@ class DashboardIndex extends StatelessWidget {
                             Expanded(
                                 child: Container(
                                   height: 150,
-                                  margin: EdgeInsets.only(right: 8),
+                                  margin: EdgeInsets.only(),
                                   child: Material(
                                     color: primaryColor,
                                     borderRadius: BorderRadius.all(Radius.circular(24)),
@@ -119,13 +136,12 @@ class DashboardIndex extends StatelessWidget {
                                           child: Column(
                                             crossAxisAlignment: CrossAxisAlignment.start,
                                             children: <Widget>[
-                                              Image(image: AssetImage("lib/assets/bathroom.png"),),
+                                            //  Image(image: AssetImage("lib/assets/bathroom.png"),),
                                               Expanded(
                                                 child: Container(
-                                                  alignment: Alignment.bottomLeft,
+                                                  alignment: Alignment.center,
                                                   margin: EdgeInsets.only(top: 32),
-                                                  child: Text(
-                                                    "Bathroom",
+                                                  child: Text(  restaurantName,
                                                     style: TextStyle(
                                                         color: Colors.white,
                                                         fontWeight: FontWeight.bold,
@@ -134,11 +150,13 @@ class DashboardIndex extends StatelessWidget {
                                                   ),
                                                 ),
                                               ),
-                                              Text(
-                                                "1 Device",
-                                                style: TextStyle(
-                                                    color: Colors.grey
-                                                ),
+                                              Container(
+                                                  alignment: Alignment.center,
+                                                  child: Text(  "1 Device",
+                                                    style: TextStyle(
+                                                        color: Colors.grey
+                                                    ),
+                                                  )
                                               )
                                             ],
                                           ),
@@ -147,16 +165,35 @@ class DashboardIndex extends StatelessWidget {
                                   ),
                                 )
                             ),
-
                           ],
                         )
                       ),
-
                     ],
                   ),
                 )
             ),
-          )
+          ),
+          Container(
+              width: MediaQuery.of(context).size.width,
+              child: RaisedButton(
+                shape:  RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(16),
+                    side: BorderSide(color: Colors.red)
+                ),
+                onPressed: (){
+                  index = random.nextInt(restaurants.length);
+                  print("index: $index");
+                  setState(() {
+                    restaurantName = restaurants[index];
+                  });
+                },
+                color: primaryColor,
+                textColor: Colors.white ,
+                child: Text(
+                  "Next one!",
+                ),
+              )
+          ),
         ],
       ),
     );
