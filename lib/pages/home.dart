@@ -5,23 +5,12 @@ import 'package:home_ass/pages/bottom-bar/settings.dart';
 import 'package:home_ass/pages/bottom-bar/statistics.dart';
 import 'package:home_ass/utils/res/colors.dart';
 
-void main() => runApp(MyApp());
-
-class MyApp extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      home: MyHomePage(),
-    );
-  }
+  _HomeScreenState createState() => _HomeScreenState();
 }
 
-class MyHomePage extends StatefulWidget {
-  @override
-  _MyHomePageState createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage>
+class _HomeScreenState extends State<HomeScreen>
     with SingleTickerProviderStateMixin {
   TabController _tabController;
   static ScrollController _scrollViewController;

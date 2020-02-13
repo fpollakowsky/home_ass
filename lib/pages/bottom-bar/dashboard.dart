@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_swiper/flutter_swiper.dart';
+import 'package:home_ass/pages/devices/heater.dart';
 import 'package:home_ass/utils/res/colors.dart';
 
 class DashboardIndex extends StatelessWidget {
@@ -17,7 +19,7 @@ class DashboardIndex extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
                       Text(
-                        "Welcome home",
+                        "Welcome home", // TODO Animate text
                         style: TextStyle(
                             color: Colors.grey,
                             fontSize: 17
@@ -46,6 +48,7 @@ class DashboardIndex extends StatelessWidget {
             ],
           ),
           AnimatedContainer(
+            height: 70,
             duration: Duration(seconds: 2),
             margin: EdgeInsets.only(top: 32),
             padding: EdgeInsets.all(8),
@@ -54,44 +57,46 @@ class DashboardIndex extends StatelessWidget {
                 border: Border.all(width: 2, color: primaryColor),
                 borderRadius: BorderRadius.all(Radius.circular(16))
             ),
-            child: Row(
-              mainAxisSize: MainAxisSize.max,
-              children: <Widget>[
-                Container(
-                  height: 64,
-                  width: 64,
-                  margin: EdgeInsets.only(right: 16),
-                  child: Icon(Icons.power),
-                ),
-                Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        Text(
-                          "20,4" + "Kwh",
-                          style: TextStyle(
-                              color: Colors.black,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 22
-                          ),
-                        ),
-                        Container(
-                          margin: EdgeInsets.only(top: 4),
-                          child: Text(
-                            "Power usage for today",
-                            style: TextStyle(
-                              color: Colors.grey,
-                              fontSize: 14,
+            child: Swiper(
+              autoplay: true,
+              itemCount: 3,
+              itemBuilder: (BuildContext context,int index){
+                return Row(
+                  mainAxisSize: MainAxisSize.max,
+                  children: <Widget>[
+                    Container(
+                      height: 64,
+                      width: 64,
+                      child: Icon(Icons.power),
+                    ),
+                    Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: <Widget>[
+                            Text(
+                              "20,4" + "Kwh",
+                              style: TextStyle(
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 22
+                              ),
                             ),
-                          ),
-                        ),
-                      ],
-                    )
-                ),
-                Container(
-                  child: IconButton(icon: Icon(Icons.keyboard_arrow_right, color: Colors.black,),), // TODO onPressed
-                )
-              ],
+                            Container(
+                              margin: EdgeInsets.only(top: 4),
+                              child: Text(
+                                "Power usage for today",
+                                style: TextStyle(
+                                  color: Colors.grey,
+                                  fontSize: 14,
+                                ),
+                              ),
+                            ),
+                          ],
+                        )
+                    ),
+                  ],
+                );
+              },
             ),
           ),
           Expanded(
@@ -112,7 +117,7 @@ class DashboardIndex extends StatelessWidget {
                                     color: primaryColor,
                                     borderRadius: BorderRadius.all(Radius.circular(24)),
                                     child: InkWell(
-                                        onTap: () => print("Container pressed"),
+                                        onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => SliderTest())),
                                         borderRadius: BorderRadius.all(Radius.circular(24)),
                                         child: Container(
                                           padding: EdgeInsets.all(16),
