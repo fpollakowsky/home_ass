@@ -111,50 +111,53 @@ class DashboardIndex extends StatelessWidget {
                         child: Row(
                           children: <Widget>[
                             Expanded(
-                                child: Hero(
-                                  tag: "roomContainer",
-                                  child: Container(
+                              child: Hero(
+                                tag: "roomContainer",
+                                child: Material(
+                                  child: AnimatedContainer(
+                                    duration: Duration(seconds: 1),
                                     height: 150,
                                     margin: EdgeInsets.only(right: 8),
-                                    child: Material(
+                                    decoration: BoxDecoration(
                                       color: primaryColor,
                                       borderRadius: BorderRadius.all(Radius.circular(24)),
-                                      child: InkWell(
-                                          onTap: () => Navigator.of(context).push(FadeRouteBuilder(page: SliderTest())),
-                                          borderRadius: BorderRadius.all(Radius.circular(24)),
-                                          child: Container(
-                                            padding: EdgeInsets.all(16),
-                                            child: Column(
-                                              crossAxisAlignment: CrossAxisAlignment.start,
-                                              children: <Widget>[
-                                                Image(image: AssetImage("lib/assets/bathroom.png")),
-                                                Expanded(
-                                                  child: Container(
-                                                    alignment: Alignment.bottomLeft,
-                                                    margin: EdgeInsets.only(top: 32),
-                                                    child: Text(
-                                                      "Bathroom",
-                                                      style: TextStyle(
-                                                          color: Colors.white,
-                                                          fontWeight: FontWeight.bold,
-                                                          fontSize: 22
-                                                      ),
+                                    ),
+                                    child: InkWell(
+                                        onTap: () => Navigator.of(context).push(FadeRouteBuilder(page: SliderTest())),
+                                        borderRadius: BorderRadius.all(Radius.circular(24)),
+                                        child: Container(
+                                          padding: EdgeInsets.all(16),
+                                          child: Column(
+                                            crossAxisAlignment: CrossAxisAlignment.start,
+                                            children: <Widget>[
+                                              Image(image: AssetImage("lib/assets/bathroom.png")),
+                                              Expanded(
+                                                child: Container(
+                                                  alignment: Alignment.bottomLeft,
+                                                  margin: EdgeInsets.only(top: 32),
+                                                  child: Text(
+                                                    "Bathroom",
+                                                    style: TextStyle(
+                                                        color: Colors.white,
+                                                        fontWeight: FontWeight.bold,
+                                                        fontSize: 22
                                                     ),
                                                   ),
                                                 ),
-                                                Text(
-                                                  "1 Device",
-                                                  style: TextStyle(
-                                                      color: Colors.grey
-                                                  ),
-                                                )
-                                              ],
-                                            ),
-                                          )
-                                      ),
+                                              ),
+                                              Text(
+                                                "1 Device",
+                                                style: TextStyle(
+                                                    color: Colors.grey
+                                                ),
+                                              )
+                                            ],
+                                          ),
+                                        )
                                     ),
                                   ),
                                 )
+                              ),
                             ),
                             Expanded(
                                 child: Container(

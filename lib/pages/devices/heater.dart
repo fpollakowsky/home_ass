@@ -1,14 +1,12 @@
 import 'dart:async';
-import 'dart:io';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_villains/villain.dart';
 import 'package:home_ass/utils/res/colors.dart';
 import 'package:sleek_circular_slider/sleek_circular_slider.dart';
 import 'package:lite_rolling_switch/lite_rolling_switch.dart';
 
-
+double opacity = 0;
+int index;
 final slider = SleekCircularSlider(
   min: 0,
   max: 40,
@@ -48,7 +46,6 @@ String percentageModifier(double value) {
   final roundedValue = value.ceil().toInt().toString();
   return '$roundedValue °C';
 }
-double opacity = 0;
 
 void main() => runApp(SliderTest());
 
@@ -62,64 +59,66 @@ class _SliderTest extends State<SliderTest> {
   void initState() {
     super.initState();
 
-    afterTransition();
+    timer();
   }
 
-  Future<Timer> afterTransition() async {
+  Future<Timer> timer() async {
     return new Timer(Duration(seconds: 1), onFinish);
   }
-
   onFinish() async {
     opacity = 1;
-    setState(() {
-
-    });
+    setState(() {});
   }
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        fontFamily: 'Roboto',
-      ),
-      home: WillPopScope(
-        onWillPop: () async => false,
-        child: SafeArea(
-          child: Material(
+    return  WillPopScope(
+      onWillPop: () async => false,
+      child: Material(
+        color: primaryColor,
+          child: SafeArea(
+            child: Container(
+              color: Colors.white,
               child: Column(
                 children: <Widget>[
                   Hero(
-                    tag: "roomContainer",
-                    child: Material(
-                      child: AnimatedContainer(
-                        duration: Duration(seconds: 2),
-                        padding: EdgeInsets.symmetric(horizontal: 16),
-                        height: 62,
-                        color: primaryColor,
-                        child: Row(
-                          children: <Widget>[
-                            IconButton(
-                              icon: Icon(
-                                  Icons.arrow_back,
-                                  color: Colors.white
-                              ),
-                              onPressed: (){
-                                opacity = 0;
-                                setState(() {
+                      tag: "roomContainer",
+                      child: Material(
+                        child: AnimatedContainer(
+                          duration: Duration(seconds: 1),
+                          padding: EdgeInsets.symmetric(horizontal: 16),
+                          height: 62,
+                          color: primaryColor,
+                          child: Row(
+                            children: <Widget>[
+                              IconButton(
+                                icon: Icon(
+                                    Icons.arrow_back,
+                                    color: Colors.white
+                                ),
+                                onPressed: (){
+                                  opacity = 0;
+                                  setState(() {
 
-                                });
-                                Navigator.pop(context);
-                              },
-                            ),
-                            Container(
-                              margin: EdgeInsets.only(left: 8),
-                              child: Text("Bathroom", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20, letterSpacing: 0.8, color: Colors.white)),
-                            ),
-                          ],
+                                  });
+                                  Navigator.pop(context);
+                                },
+                              ),
+                              Container(
+                                margin: EdgeInsets.only(left: 8),
+                                child: Text(
+                                  "Bathroom",
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 22
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
-                      ),
-                    )
+                      )
                   ),
                   AnimatedOpacity(
                     duration: Duration(seconds: 1),
@@ -203,45 +202,103 @@ class _SliderTest extends State<SliderTest> {
                     ),
                   ),
                   Expanded(
-                      child: AnimatedOpacity(
-                        duration: Duration(seconds: 1),
-                        opacity: opacity,
-                        child: SleekCircularSlider(
-                          min: 0,
-                          max: 40,
-                          initialValue: 25,
-                          appearance: CircularSliderAppearance(
-                              angleRange: 360,
-                              startAngle: 270,
-                              customWidths: CustomSliderWidths(
-                                  handlerSize: 10,
-                                  trackWidth: 2,
-                                  progressBarWidth: 6
-                              ),
-                              customColors: CustomSliderColors(
-                                  shadowColor: Colors.grey,
-                                  shadowMaxOpacity: 0.2,
-                                  shadowStep: 4,
-                                  dotColor: primaryColor,
-                                  trackColor: Colors.grey,
-                                  progressBarColor: primaryColor
-                              ),
-                              infoProperties: InfoProperties(
-                                  mainLabelStyle: TextStyle(
-                                      fontSize: 22,
-                                      fontWeight: FontWeight.bold
+                    child: PageView(
+                      onPageChanged: (val){
+                        index = val;
+                      },
+                      children: <Widget>[
+                        Column(
+                          children: <Widget>[
+                            Expanded(
+                                child: AnimatedOpacity(
+                                  duration: Duration(seconds: 1),
+                                  opacity: opacity,
+                                  child: SleekCircularSlider(
+                                    min: 0,
+                                    max: 40,
+                                    initialValue: 25,
+                                    appearance: CircularSliderAppearance(
+                                        angleRange: 360,
+                                        startAngle: 270,
+                                        customWidths: CustomSliderWidths(
+                                            handlerSize: 10,
+                                            trackWidth: 2,
+                                            progressBarWidth: 6
+                                        ),
+                                        customColors: CustomSliderColors(
+                                            shadowColor: Colors.grey,
+                                            shadowMaxOpacity: 0.2,
+                                            shadowStep: 4,
+                                            dotColor: primaryColor,
+                                            trackColor: Colors.grey,
+                                            progressBarColor: primaryColor
+                                        ),
+                                        infoProperties: InfoProperties(
+                                            mainLabelStyle: TextStyle(
+                                                fontSize: 22,
+                                                fontWeight: FontWeight.bold
+                                            ),
+                                            modifier: percentageModifier
+                                        )
+                                    ),
+                                    onChange: (double value) {
+                                      print(value);
+                                    },
+                                    onChangeEnd: (double value){
+                                      // TODO add value to db
+                                    },
                                   ),
-                                  modifier: percentageModifier
-                              )
-                          ),
-                          onChange: (double value) {
-                            print(value);
-                          },
-                          onChangeEnd: (double value){
-                            // TODO add value to db
-                          },
+                                )
+                            ),
+                          ],
                         ),
-                      )
+                        Column(
+                          children: <Widget>[
+                            Expanded(
+                                child: AnimatedOpacity(
+                                  duration: Duration(seconds: 1),
+                                  opacity: opacity,
+                                  child: SleekCircularSlider(
+                                    min: 0,
+                                    max: 40,
+                                    initialValue: 25,
+                                    appearance: CircularSliderAppearance(
+                                        angleRange: 360,
+                                        startAngle: 270,
+                                        customWidths: CustomSliderWidths(
+                                            handlerSize: 10,
+                                            trackWidth: 2,
+                                            progressBarWidth: 6
+                                        ),
+                                        customColors: CustomSliderColors(
+                                            shadowColor: Colors.grey,
+                                            shadowMaxOpacity: 0.2,
+                                            shadowStep: 4,
+                                            dotColor: primaryColor,
+                                            trackColor: Colors.grey,
+                                            progressBarColor: primaryColor
+                                        ),
+                                        infoProperties: InfoProperties(
+                                            mainLabelStyle: TextStyle(
+                                                fontSize: 22,
+                                                fontWeight: FontWeight.bold
+                                            ),
+                                            modifier: percentageModifier
+                                        )
+                                    ),
+                                    onChange: (double value) {
+                                      print(value);
+                                    },
+                                    onChangeEnd: (double value){
+                                      // TODO add value to db
+                                    },
+                                  ),
+                                )
+                            ),
+                          ],
+                        )
+                      ],
+                    ),
                   ),
                   AnimatedOpacity(
                     duration: Duration(seconds: 1),
@@ -312,10 +369,10 @@ class _SliderTest extends State<SliderTest> {
                     ),
                   )
                 ],
-              )
-          ),
-        ),
-      )
+              ),
+            )
+          )
+      ),
     );
   }
 }

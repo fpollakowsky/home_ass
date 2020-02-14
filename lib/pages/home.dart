@@ -63,11 +63,8 @@ class _HomeScreenState extends State<HomeScreen>
           selectedItemColor: primaryColor,
           onTap: _onItemTapped,
         ),
-        body: Container(
-            color: Colors.white,
-            child: SafeArea(
-              child: _widgetOptions.elementAt(_selectedIndex),
-            )
+        body: SafeArea(
+          child: _widgetOptions.elementAt(_selectedIndex),
         )
     );
   }
