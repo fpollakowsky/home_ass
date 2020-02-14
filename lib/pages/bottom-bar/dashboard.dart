@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
-import 'package:home_ass/pages/devices/heater.dart';
+import 'package:home_ass/pages/devices/devicesTab.dart';
 import 'package:home_ass/utils/res/colors.dart';
 import 'package:home_ass/utils/res/transitions.dart';
 
@@ -123,7 +123,7 @@ class DashboardIndex extends StatelessWidget {
                                       borderRadius: BorderRadius.all(Radius.circular(24)),
                                     ),
                                     child: InkWell(
-                                        onTap: () => Navigator.of(context).push(FadeRouteBuilder(page: SliderTest())),
+                                        onTap: () => Navigator.of(context).push(FadeRouteBuilder(page: DevicesTab())),
                                         borderRadius: BorderRadius.all(Radius.circular(24)),
                                         child: Container(
                                           padding: EdgeInsets.all(16),
