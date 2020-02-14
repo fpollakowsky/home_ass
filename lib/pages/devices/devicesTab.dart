@@ -115,7 +115,10 @@ class _DevicesTab extends State<DevicesTab> {
         color: primaryColor,
           child: SafeArea(
             child: Container(
-              color: Colors.white,
+              decoration: BoxDecoration(
+                color: Colors.white,
+                image: DecorationImage(image: AssetImage("lib/assets/background_devices.png"), alignment: Alignment.bottomRight),
+              ),
               child: Column(
                 children: <Widget>[
                   Hero(
@@ -219,11 +222,10 @@ class _DevicesTab extends State<DevicesTab> {
                   ),
                   Expanded(
                     child: AnimatedOpacity(
-                      duration: Duration(seconds: 2),
+                      duration: Duration(seconds: 1),
                       opacity: opacity,
                       child: Container(
                         child: PageView(
-                          // TODO Jump to page
                           physics: NeverScrollableScrollPhysics(),
                           controller: _controller,
                           children: <Widget>[

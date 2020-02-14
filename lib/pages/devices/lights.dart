@@ -16,21 +16,19 @@ class AllLights extends StatelessWidget {
           padding: EdgeInsets.all(16),
           decoration: BoxDecoration(
             color: cardColor,
-            borderRadius: BorderRadius.all(Radius.circular(4))
+            borderRadius: BorderRadius.all(Radius.circular(4)),
           ),
           child: Row(
             children: <Widget>[
               Expanded(
-                child:Container(
-                    child: Text(
-                      entries[index],
-                      style: TextStyle(
-                        color: buttonTextColor,
-                        fontSize: 26,
-                        fontWeight: FontWeight.bold
-                      ),
-                    )
-                ),
+                child: Text(
+                  entries[index],
+                  style: TextStyle(
+                      color: buttonTextColor,
+                      fontSize: 26,
+                      fontWeight: FontWeight.bold
+                  ),
+                )
               ),
               CustomSwitchButton_1(
                 height: 40,
