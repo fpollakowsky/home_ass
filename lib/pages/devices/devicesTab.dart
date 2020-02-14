@@ -119,7 +119,7 @@ class _DevicesTab extends State<DevicesTab> {
               child: Column(
                 children: <Widget>[
                   Hero(
-                      tag: "roomContainer",
+                      tag: widget.roomName,
                       child: Material(
                         child: AnimatedContainer(
                           duration: Duration(seconds: 1),
