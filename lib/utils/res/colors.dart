@@ -8,18 +8,6 @@ const Color primaryDarkColor = Color(0xff870000);
 const Color cardColor = Color(0xffeeeeee);
 const Color buttonTextColor = Color(0xff37474f);
 
-// init device page colors
-const Color thermostatBorderColor = Colors.white;
-const Color thermostatIconColor = Colors.grey;
-const Color thermostatBoxColor = primaryColor;
-const Color thermostatTextColor = Colors.grey;
-
-const Color lightBorderColor = Colors.grey;
-const Color lightTextColor = Colors.grey;
-const Color lightBoxColor = Colors.white;
-const Color lightIconColor = Colors.grey;
-
-
 const Color selectedBoxColor = primaryColor;
 const Color unSelectedBoxColor = Colors.white;
 const Color selectedBorderColor = Colors.white;

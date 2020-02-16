@@ -121,7 +121,7 @@ class DashboardIndex extends StatelessWidget {
                                       color: primaryColor,
                                       borderRadius: BorderRadius.all(Radius.circular(24)),
                                       child: InkWell(
-                                          onTap: () => Navigator.of(context).push(FadeRouteBuilder(page: DevicesTab(roomName: "Bathroom",))),
+                                          onTap: () => Navigator.of(context).push(FadeRouteBuilder(page: DevicesTab(roomName: "Bathroom"))),
                                           borderRadius: BorderRadius.all(Radius.circular(24)),
                                           child: Container(
                                             padding: EdgeInsets.all(16),
