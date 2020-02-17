@@ -164,7 +164,7 @@ class _DevicesTab extends State<DevicesTab> {
                                     color: Colors.white
                                 ),
                                 onPressed: (){
-                                  // TODO add onPressed
+                                  // TODO add add device method
                                 },
                               ),
                             ],

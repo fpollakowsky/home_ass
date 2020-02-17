@@ -29,7 +29,7 @@ class CustomSwitchButton_1 extends StatefulWidget {
       {this.value = false,
         this.textOff = "Off",
         this.textOn = "On",
-        this.textSize = 14.0,
+        this.textSize = 14,
         this.colorOn = Colors.green,
         this.colorOff = Colors.red,
         this.iconOff = Icons.flag,
@@ -50,7 +50,7 @@ class CustomSwitchButton_1 extends StatefulWidget {
 }
 
 class _CustomSwitchButton_1 extends State<CustomSwitchButton_1>
-    with SingleTickerProviderStateMixin {
+  with SingleTickerProviderStateMixin {
   AnimationController animationController;
   Animation<double> animation;
   double value = 0.0;

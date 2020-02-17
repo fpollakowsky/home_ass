@@ -51,8 +51,8 @@ class _HomeScreenState extends State<HomeScreen>
               title: Text('Home'),
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.pie_chart),
-              title: Text('Statistics'),
+              icon: Icon(Icons.device_hub),
+              title: Text('Scenes'),
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.settings),
