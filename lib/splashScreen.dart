@@ -2,12 +2,14 @@ import 'dart:async';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_villains/villain.dart';
 import 'package:home_ass/utils/res/colors.dart';
 import 'pages/home.dart';
 
 void main() {
   runApp(MaterialApp(
       debugShowCheckedModeBanner: false,
+      navigatorObservers: [VillainTransitionObserver()],
       home: OnBoard(),
   ));
 }

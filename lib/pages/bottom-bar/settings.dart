@@ -4,11 +4,39 @@ import 'package:home_ass/utils/res/colors.dart';
 import 'package:home_ass/utils/res/styles.dart';
 import 'package:home_ass/utils/ui-elements/custom_buttons.dart';
 
-class SettingsIndex extends StatelessWidget {
+class SettingsIndex extends StatefulWidget{
+  @override
+  _SettingsIndex createState() => _SettingsIndex();
+}
+
+class _SettingsIndex extends State<SettingsIndex>
+  with SingleTickerProviderStateMixin{
+  var rotation_1 = 0.0;
+  var rotation_2 = 0.0;
+  AnimationController buttonAnimationController;
+
+  buttonAnimation(){
+    if (buttonAnimationController.value == 1){
+      buttonAnimationController.animateTo(0);
+    }
+    else{
+      buttonAnimationController.animateTo(1);
+    }
+  }
+
+  @override
+  void initState(){
+    super.initState();
+    buttonAnimationController = AnimationController(
+        vsync: this,
+        duration: const Duration(milliseconds: 200)
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Material(
-      color: cardColor,
+      color: primaryDarkColor,
       child: SafeArea(
         child: Column(
           children: <Widget>[
@@ -19,7 +47,6 @@ class SettingsIndex extends StatelessWidget {
                 children: <Widget>[
                   Expanded(
                     child: Container(
-                      margin: EdgeInsets.only(left: 32),
                       child: Text(
                         "Settings",
                         textAlign: TextAlign.center,
@@ -31,16 +58,6 @@ class SettingsIndex extends StatelessWidget {
                       ),
                     ),
                   ),
-                  IconButton(
-                    icon: Icon(
-                      Icons.save,
-                      color: Colors.white,
-                      size: 32,
-                    ),
-                    onPressed: (){
-                      // TODO save to shared pref
-                    },
-                  ),
                 ],
               ),
             ),
@@ -49,7 +66,7 @@ class SettingsIndex extends StatelessWidget {
               padding: EdgeInsets.symmetric(horizontal: 12),
               height: 96,
               decoration: BoxDecoration(
-                  color: primaryColor,
+                  color: Colors.white,
                   borderRadius: BorderRadius.all(Radius.circular(16))
               ),
               child: Row(
@@ -58,7 +75,6 @@ class SettingsIndex extends StatelessWidget {
                     height: 72,
                     width: 72,
                     decoration: BoxDecoration(
-                      color: Colors.white30,
                       borderRadius: BorderRadius.all(Radius.circular(16)),
                       image: DecorationImage(image: NetworkImage("https://via.placeholder.com/72"),),
                     )
@@ -87,17 +103,11 @@ class SettingsIndex extends StatelessWidget {
             ),
             Expanded(
               child: Container(
-                color: cardColor,
+                color: primaryDarkColor,
                 padding: EdgeInsets.all(8),
                 child: Container(
                   decoration: BoxDecoration(
                     color: Colors.white,
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.white10,
-                        offset: Offset(0, -8),
-                      )
-                    ],
                     borderRadius: BorderRadius.all(Radius.circular(16))
                   ),
                   child: SingleChildScrollView(
@@ -186,7 +196,26 @@ class SettingsIndex extends StatelessWidget {
                                     child: Text("Personal Information", style: settingsH3),
                                   ),
                                 ),
-                                Icon(Icons.navigate_next,size: 32, color: Colors.grey),
+                                AnimatedBuilder(
+                                  animation: buttonAnimationController,
+                                  builder: (BuildContext context, Widget _widget){
+                                    return Transform.rotate(
+                                      angle: buttonAnimationController.value * rotation_1,
+                                      child: _widget,
+                                    );
+                                  },
+                                  child: IconButton(
+                                    icon: Icon(Icons.navigate_next, size: 32),
+                                    color: Colors.grey,
+                                    onPressed: (){
+                                      setState(() {
+                                        rotation_1 = 1.6;
+                                        rotation_2 = 0;
+                                        buttonAnimation();
+                                      });
+                                    },
+                                  ),
+                                )
                               ],
                             ),
                           ),
@@ -226,7 +255,26 @@ class SettingsIndex extends StatelessWidget {
                                     child: Text("IP Address", style: settingsH3),
                                   ),
                                 ),
-                                Icon(Icons.navigate_next,size: 32, color: Colors.grey),
+                                AnimatedBuilder(
+                                  animation: buttonAnimationController,
+                                  builder: (BuildContext context, Widget _widget){
+                                    return Transform.rotate(
+                                      angle: buttonAnimationController.value * rotation_2,
+                                      child: _widget,
+                                    );
+                                  },
+                                  child: IconButton(
+                                    icon: Icon(Icons.navigate_next, size: 32),
+                                    color: Colors.grey,
+                                    onPressed: (){
+                                      setState(() {
+                                        rotation_1 = 0;
+                                        rotation_2 = 1.6;
+                                        buttonAnimation();
+                                      });
+                                    },
+                                  ),
+                                )
                               ],
                             ),
                           ),

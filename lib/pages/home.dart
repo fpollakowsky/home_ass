@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:home_ass/pages/bottom-bar//dashboard.dart';
 import 'package:home_ass/pages/bottom-bar/settings.dart';
-import 'package:home_ass/pages/bottom-bar/statistics.dart';
+import 'package:home_ass/pages/bottom-bar/scenes.dart';
 import 'package:home_ass/utils/res/colors.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -17,7 +17,7 @@ class _HomeScreenState extends State<HomeScreen>
   int _selectedIndex = 0;
   static List<Widget> _widgetOptions = <Widget>[
     DashboardIndex(),
-    StatisticsIndex(),
+    ScenesIndex(),
     SettingsIndex()
   ];
 
@@ -44,6 +44,7 @@ class _HomeScreenState extends State<HomeScreen>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: primaryDarkColor,
         bottomNavigationBar: BottomNavigationBar(
           items: const <BottomNavigationBarItem>[
             BottomNavigationBarItem(

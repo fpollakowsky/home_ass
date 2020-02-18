@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_villains/villain.dart';
 import 'package:home_ass/pages/devices/lights.dart';
 import 'package:home_ass/pages/devices/sockets.dart';
 import 'package:home_ass/pages/devices/thermostat.dart';
@@ -90,7 +91,6 @@ class DevicesTab extends StatefulWidget{
 
 class _DevicesTab extends State<DevicesTab> {
 
-
   final _controller = PageController();
 
   @override
@@ -113,69 +113,74 @@ class _DevicesTab extends State<DevicesTab> {
       onWillPop: () async => false,
       child: Material(
         color: primaryColor,
-          child: SafeArea(
-            child: Container(
-              decoration: BoxDecoration(
-                color: Colors.white,
-                image: DecorationImage(image: AssetImage("lib/assets/background_devices.png"), alignment: Alignment.bottomRight),
-              ),
-              child: Column(
-                children: <Widget>[
-                  Hero(
-                      tag: widget.roomName,
-                      child: Material(
-                        child: AnimatedContainer(
-                          duration: Duration(seconds: 1),
-                          padding: EdgeInsets.symmetric(horizontal: 16),
-                          height: 62,
-                          color: primaryColor,
-                          child: Row(
-                            children: <Widget>[
-                              IconButton(
-                                icon: Icon(
-                                    Icons.arrow_back,
-                                    color: Colors.white
-                                ),
-                                onPressed: (){
-                                  opacity = 0;
-                                  setState(() {
+        child: SafeArea(
+          child: Container(
+            decoration: BoxDecoration(
+              color: primaryDarkColor,
+            ),
+            child: Column(
+              children: <Widget>[
+                Hero(
+                  tag: widget.roomName,
+                  child: Material(
+                    child: AnimatedContainer(
+                      duration: Duration(seconds: 1),
+                      padding: EdgeInsets.symmetric(horizontal: 16),
+                      height: 62,
+                      color: primaryColor,
+                      child: Row(
+                        mainAxisSize: MainAxisSize.max,
+                        children: <Widget>[
+                          IconButton(
+                            icon: Icon(
+                                Icons.arrow_back,
+                                color: Colors.white
+                            ),
+                            onPressed: (){
+                              opacity = 0;
+                              setState(() {
 
-                                  });
-                                  Navigator.pop(context);
-                                },
-                              ),
-                              Expanded(
-                                child: Container(
-                                  padding: EdgeInsets.only(left: 8),
-                                  child: Text(
-                                    widget.roomName,
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 22
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              IconButton(
-                                icon: Icon(
-                                    Icons.add,
-                                    color: Colors.white
-                                ),
-                                onPressed: (){
-                                  // TODO add add device method
-                                },
-                              ),
-                            ],
+                              });
+                              Navigator.pop(context);
+                            },
                           ),
-                        ),
-                      )
+                          Expanded(
+                            child: Container(
+                              padding: EdgeInsets.only(left: 8),
+                              child: Text(
+                                widget.roomName,
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 22
+                                ),
+                              ),
+                            ),
+                          ),
+                          IconButton(
+                            icon: Icon(
+                                Icons.add,
+                                color: Colors.white
+                            ),
+                            onPressed: (){
+                              // TODO add add device method
+                            },
+                          ),
+                        ],
+                      ),
+                    ),
+                  )
+                ),
+                Villain(
+                  villainAnimation: VillainAnimation.fromBottom(
+                    relativeOffset: 0.4,
+                    from: Duration(milliseconds: 200),
+                    to: Duration(seconds: 1),
                   ),
-                  AnimatedOpacity(
-                    duration: Duration(seconds: 1),
-                    opacity: opacity,
-                    child: Container(
+                  animateExit: true,
+                  secondaryVillainAnimation: VillainAnimation.fade(),
+                  child: Container(
                       height: 98,
                       child: ListView.builder(
                           scrollDirection: Axis.horizontal,
@@ -218,32 +223,26 @@ class _DevicesTab extends State<DevicesTab> {
                             );
                           }
                       )
-                    ),
                   ),
-                  Expanded(
-                    child: AnimatedOpacity(
-                      duration: Duration(seconds: 1),
-                      opacity: opacity,
-                      child: Container(
-                        child: PageView(
-                          physics: NeverScrollableScrollPhysics(),
-                          controller: _controller,
-                          children: <Widget>[
-                            AllLights(),
-                            Thermostats(),
-                            Thermostats(),
-                            Thermostats(),
-                            Thermostats(),
-                            Sockets(),
-                          ],
-                        ),
-                      ),
-                    )
+                ),
+                Expanded(
+                  child: PageView(
+                    physics: NeverScrollableScrollPhysics(),
+                    controller: _controller,
+                    children: <Widget>[
+                      AllLights(),
+                      Thermostats(),
+                      Thermostats(),
+                      Thermostats(),
+                      Thermostats(),
+                      Sockets(),
+                    ],
                   ),
-                ],
-              ),
-            )
+                ),
+              ],
+            ),
           )
+        )
       ),
     );
   }

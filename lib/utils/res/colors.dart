@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 
 const Color primaryColor = Color(0xffbf360c);
 const Color primaryLightColor = Color(0xfff9683a);
-const Color primaryDarkColor = Color(0xff870000);
+const Color primaryDarkColor =  Color(0xFF091C27);
 
-const Color cardColor = Color(0xffeeeeee);
+const Color cardColor = Color(0xff6B7F8E);
 const Color buttonTextColor = Color(0xff37474f);
 
 const Color selectedBoxColor = primaryColor;
