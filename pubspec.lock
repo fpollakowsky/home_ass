@@ -90,6 +90,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.0.3"
+  flutter_page_transition:
+    dependency: "direct main"
+    description:
+      name: flutter_page_transition
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.1.6"
   flutter_sequence_animation:
     dependency: transitive
     description:
@@ -123,6 +130,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.1.4"
+  intl:
+    dependency: "direct main"
+    description:
+      name: intl
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.16.1"
   lite_rolling_switch:
     dependency: "direct main"
     description:
@@ -172,6 +186,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.8.0+1"
+  permission_handler:
+    dependency: "direct main"
+    description:
+      name: permission_handler
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "3.3.0"
   petitparser:
     dependency: transitive
     description:
@@ -283,5 +304,5 @@ packages:
     source: hosted
     version: "2.2.0"
 sdks:
-  dart: ">=2.4.0 <3.0.0"
+  dart: ">=2.5.0 <3.0.0"
   flutter: ">=0.1.4 <3.0.0"

@@ -8,6 +8,7 @@ import 'package:home_ass/pages/devices/thermostat.dart';
 import 'package:home_ass/utils/res/colors.dart';
 import 'package:sleek_circular_slider/sleek_circular_slider.dart';
 
+//#region Variables
 double opacity = 0;
 double iconSize = 40;
 int index;
@@ -74,8 +75,7 @@ String percentageModifier(double value) {
   final roundedValue = value.ceil().toInt().toString();
   return '$roundedValue °C';
 }
-
-void main() => runApp(DevicesTab());
+//#endregion
 
 class DevicesTab extends StatefulWidget{
   @required

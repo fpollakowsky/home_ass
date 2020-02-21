@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_villains/villain.dart';
+import 'package:home_ass/utils/mysql/getRequests.dart';
 import 'package:home_ass/utils/res/colors.dart';
 import 'pages/home.dart';
 
@@ -22,16 +23,26 @@ class _OnBoard extends State<OnBoard> {
   @override
   void initState() {
     super.initState();
-
-    loadData();
+    getDeviceCount();
+    getDeviceIDs().then((onValue){
+      getSensorData().then((val){
+        if (val == true){
+          getDeviceInformation().then((val){
+            if (val == true){
+              loadData();
+            }
+          });
+        }
+      });
+    });
   }
 
   Future<Timer> loadData() async {
-    return new Timer(Duration(seconds: 2), onDoneLoading);
+    return new Timer(Duration(seconds: 0), onDoneLoading);
   }
 
   onDoneLoading() async {
-    Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => HomeScreen()));
+    Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => HomeScreen(index: 0,)));
   }
 
   @override

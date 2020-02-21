@@ -39,7 +39,7 @@ class AllLights extends StatelessWidget {
                         ),
                       )
                   ),
-                  CustomSwitchButton_1(
+                  CustomSwitchHorizontal(
                     height: 40,
                     width: 112,
                     borderRadius: 4,
