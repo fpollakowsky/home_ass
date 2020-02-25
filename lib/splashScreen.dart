@@ -23,7 +23,7 @@ class _OnBoard extends State<OnBoard> {
   @override
   void initState() {
     super.initState();
-    getDeviceCount();
+    mainRequest();
     getDeviceIDs().then((onValue){
       getSensorData().then((val){
         if (val == true){

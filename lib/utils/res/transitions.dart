@@ -1,5 +1,8 @@
 import 'package:flutter/cupertino.dart';
 
+int milliStart = 1100;
+int milliEnd = 1800;
+
 class FadeRouteBuilder<T> extends PageRouteBuilder<T> {
   final Widget page;
   final int transitionTime;
@@ -66,4 +69,9 @@ class SlideRouteBuilder extends PageRouteBuilder {
         );
       }
   );
+}
+
+setAnimationTime(){
+  milliStart = milliStart + 150;
+  milliEnd = milliEnd + 150;
 }

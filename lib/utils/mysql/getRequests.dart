@@ -3,19 +3,19 @@ import 'package:home_ass/utils/time.dart';
 import 'package:mysql1/mysql1.dart';
 
 //#region Variables
-final List<int> deviceIDRight = <int>[];
-final List<int> deviceIDLeft = <int>[];
-final List<List<String>> deviceInfoRight = [
+List<List<dynamic>> allDevices = [
+  [], // ID
+  [], // Left / Right -> TODO DEPRECATED
   [], // Type
-  [], // Room
   [], // Name
-  []  // Image
+  [], // Image
+  []  // Value -> On / Off | 1 / 0
 ];
-final List<List<String>> deviceInfoLeft = [
-  [], // Type
-  [], // Room
+
+final List<List<void>> rooms = [
   [], // Name
-  []  // Image
+  [], // Image
+  []  // Device count
 ];
 final List<int> deviceIDs = <int>[];
 List<dynamic> sensorData = []; // Pressure | Temp | Hum
@@ -23,18 +23,10 @@ int deviceCount;
 //#endregion
 
 mainRequest(){
-  getDeviceInformation();
-  getSensorData();
+  getRoomNames();
 }
 
-void getDeviceCount()async{
-  var conn = await MySqlConnection.connect(connSettings);
-  var getDeviceCount = await conn.query('SELECT COUNT(id) FROM devices');
-  for (var row in getDeviceCount) {
-    deviceCount = row[0];
-  }
-}
-
+// ignore: missing_return
 Future<int> getDeviceMaxID()async{
   var conn = await MySqlConnection.connect(connSettings);
   var getDeviceCount = await conn.query('SELECT MAX(id) FROM devices');
@@ -44,8 +36,10 @@ Future<int> getDeviceMaxID()async{
 }
 
 Future<bool> getDeviceIDs()async{
+  String query = "SELECT id FROM devices";
   var conn = await MySqlConnection.connect(connSettings);
-  var getDeviceIDs = await conn.query('SELECT id FROM devices');
+  var getDeviceIDs = await conn.query(query);
+
   for (var row in getDeviceIDs) {
     deviceIDs.add(row[0]);
   }
@@ -55,13 +49,14 @@ Future<bool> getDeviceIDs()async{
 Future<bool> getDeviceInformation()async{
   var conn = await MySqlConnection.connect(connSettings);
   for(var i = 0; i<deviceIDs.length; i++){
-    var result = await conn.query('SELECT * FROM devices WHERE id= ?', [deviceIDs[i]]);
-    if (i%2 != 0){
-      for (var row in result){
-        deviceIDRight.add(row[0]);
-        deviceInfoRight[0].add(row[1]);
-        deviceInfoRight[1].add(row[2]);
-        deviceInfoRight[2].add(row[5]);
+    var result = await conn.query('SELECT id,type,thing_name,val,isFavouriteBy FROM devices WHERE id= ?', [deviceIDs[i]]);
+    for (var row in result){
+      if (row != null){
+        allDevices[0].add(row[0]);
+        allDevices[2].add(row[1]);
+        allDevices[3].add(row[2]);
+        allDevices[5].add(row[3]);
+        allDevices[1].add(row[4]);
 
         switch(row[1]){
           case "socket":
@@ -69,41 +64,10 @@ Future<bool> getDeviceInformation()async{
           case "switch":
             break;
           case "blinder":
-            deviceInfoRight[3].add("lib/assets/shutter.png");
+            allDevices[4].add("lib/assets/shutter.png");
             break;
           case "light":
-            deviceInfoRight[3].add("lib/assets/lightbulb.png");
-            break;
-          case "fridge":
-            break;
-          case "sensor_weather":
-            break;
-          case "thermostat":
-            break;
-          case "fan":
-            break;
-          case "speaker":
-            break;
-        }
-      }
-    }
-    else{
-      for (var row in result) {
-        deviceIDLeft.add(row[0]);
-        deviceInfoLeft[0].add(row[1]);
-        deviceInfoLeft[1].add(row[2]);
-        deviceInfoLeft[2].add(row[5]);
-
-        switch(row[1]){
-          case "socket":
-            break;
-          case "switch":
-            break;
-          case "blinder":
-            deviceInfoLeft[3].add("lib/assets/shutter.png");
-            break;
-          case "light":
-            deviceInfoLeft[3].add("lib/assets/lightbulb.png");
+            allDevices[4].add("lib/assets/lightbulb.png");
             break;
           case "fridge":
             break;
@@ -120,20 +84,6 @@ Future<bool> getDeviceInformation()async{
     }
   }
   return true;
-}
-
-Future<bool> getDeviceVal(int id)async{
-  String query = "SELECT val FROM devices WHERE id = " + id.toString();
-  var conn = await MySqlConnection.connect(connSettings);
-  var getDeviceVal = await conn.query(query);
-  for (var row in getDeviceVal) {
-    if (row[0] == 0){
-      return false;
-    }
-    else{
-      return true;
-    }
-  }
 }
 
 Future<bool> getSensorData()async{
@@ -152,6 +102,17 @@ Future<bool> getSensorData()async{
   return false;
 }
 
+Future<bool> getRoomNames()async{
+  var conn = await MySqlConnection.connect(connSettings);
+  var getRooms = await conn.query("SELECT name,image,device_count FROM rooms");
+  for (var row in getRooms) {
+    rooms[0].add(row[0]);
+    rooms[0].add(row[1]);
+    rooms[0].add(row[2]);
+  }
+  return true;
+}
+
 bool getGatewayStatus(){
   var conn = MySqlConnection.connect(connSettings);
   if (conn == null){
@@ -162,8 +123,4 @@ bool getGatewayStatus(){
     // active
     return true;
   }
-}
-
-getRooms(){
-  // TODO get rooms from mysql
 }

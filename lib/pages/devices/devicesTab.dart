@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_page_transition/flutter_page_transition.dart';
 import 'package:flutter_villains/villain.dart';
 import 'package:home_ass/pages/devices/lights.dart';
 import 'package:home_ass/pages/devices/sockets.dart';
@@ -68,7 +69,6 @@ final slider = SleekCircularSlider(
     print(value);
   },
   onChangeEnd: (double value){
-    // TODO add value to db
   },
 );
 String percentageModifier(double value) {
@@ -157,15 +157,6 @@ class _DevicesTab extends State<DevicesTab> {
                                 ),
                               ),
                             ),
-                          ),
-                          IconButton(
-                            icon: Icon(
-                                Icons.add,
-                                color: Colors.white
-                            ),
-                            onPressed: (){
-                              // TODO add add device method
-                            },
                           ),
                         ],
                       ),

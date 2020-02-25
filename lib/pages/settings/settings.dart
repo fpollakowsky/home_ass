@@ -74,7 +74,7 @@ class _SettingsIndex extends State<SettingsIndex>
                           ),
                           Container(
                               margin: EdgeInsets.only(top: 2),
-                              child: Text("Nickname", style: settingsH2)
+                              child: Text("@"+ "Nickname", style: settingsH2)
                           ),
                         ],
                       ),

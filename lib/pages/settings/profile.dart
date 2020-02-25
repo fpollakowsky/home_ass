@@ -7,8 +7,8 @@ import 'package:home_ass/utils/res/styles.dart';
 import 'package:home_ass/utils/res/transitions.dart';
 
 // TODO Add profile picture to shared pref
-// TODO Add more information
 
+// ignore: must_be_immutable
 class ProfilePage extends StatefulWidget {
   @required
   double opacityVal;
@@ -56,8 +56,8 @@ class _ProfilePage extends State<ProfilePage> {
                 ),
               ),
               AnimatedOpacity(
-                duration: Duration(milliseconds: 300),
-                curve: Curves.easeIn,
+                duration: Duration(milliseconds: 100),
+                curve: Curves.linear,
                 opacity: widget.opacityVal,
                 child: Container(
                     margin: EdgeInsets.only(top: 16),
@@ -77,7 +77,7 @@ class _ProfilePage extends State<ProfilePage> {
                 ),
               ),
               AnimatedOpacity(
-                duration: Duration(milliseconds: 300),
+                duration: Duration(milliseconds: 100),
                 curve: Curves.easeIn,
                 opacity: widget.opacityVal,
                 child: Container(

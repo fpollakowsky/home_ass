@@ -2,7 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_page_transition/flutter_page_transition.dart';
 import 'package:flutter_villains/villain.dart';
-import 'package:home_ass/pages/dashboard/addDevice.dart';
 import 'package:home_ass/pages/dashboard/deviceWidgets.dart';
 import 'package:home_ass/pages/devices/devicesTab.dart';
 import 'package:home_ass/pages/settings/profile.dart';
@@ -55,8 +54,9 @@ class DashboardIndex extends StatelessWidget {
                     child: Villain(
                       villainAnimation: VillainAnimation.fromBottom(
                         relativeOffset: 0.4,
-                        from: Duration(milliseconds: 100),
-                        to: Duration(seconds: 1),
+                        from: Duration(milliseconds: 0),
+                        to: Duration(milliseconds: 700
+                        ),
                       ),
                       animateExit: false,
                       secondaryVillainAnimation: VillainAnimation.fade(),
@@ -108,9 +108,9 @@ class DashboardIndex extends StatelessWidget {
                   itemBuilder: (BuildContext context, int index){
                     return Villain(
                       villainAnimation: VillainAnimation.fromBottom(
-                        relativeOffset: 0.4,
-                        from: Duration(milliseconds: 100),
-                        to: Duration(seconds: 1),
+                        relativeOffset: 0.2,
+                        from: Duration(milliseconds: 300),
+                        to: Duration(milliseconds: 1000),
                       ),
                       animateExit: false,
                       secondaryVillainAnimation: VillainAnimation.fade(),
@@ -181,8 +181,8 @@ class DashboardIndex extends StatelessWidget {
                 child: Villain(
                   villainAnimation: VillainAnimation.fromBottom(
                     relativeOffset: 0.4,
-                    from: Duration(milliseconds: 100),
-                    to: Duration(seconds: 1),
+                    from: Duration(milliseconds: 600),
+                    to: Duration(milliseconds: 1300),
                   ),
                   animateExit: false,
                   secondaryVillainAnimation: VillainAnimation.fade(),
@@ -200,8 +200,8 @@ class DashboardIndex extends StatelessWidget {
                 child: Villain(
                   villainAnimation: VillainAnimation.fromBottom(
                     relativeOffset: 0.4,
-                    from: Duration(milliseconds: 100),
-                    to: Duration(seconds: 1),
+                    from: Duration(milliseconds: 800),
+                    to: Duration(milliseconds: 1700),
                   ),
                   animateExit: false,
                   secondaryVillainAnimation: VillainAnimation.fade(),
@@ -272,7 +272,7 @@ class DashboardIndex extends StatelessWidget {
                               Icon(Icons.devices, size: 40, color: Colors.white),
                               Expanded(
                                 child: Text(
-                                  deviceCount.toString(),
+                                  deviceIDs.length.toString(),
                                   style: dashboardCard2,
                                   textAlign: TextAlign.center,
                                 ),
@@ -289,54 +289,28 @@ class DashboardIndex extends StatelessWidget {
               margin: EdgeInsets.only(top: 32),
               child: Villain(
                 villainAnimation: VillainAnimation.fromBottom(
-                  relativeOffset: 0.4,
-                  from: Duration(milliseconds: 100),
-                  to: Duration(seconds: 1),
+                  relativeOffset: 0.3,
+                  from: Duration(milliseconds: 1100),
+                  to: Duration(milliseconds: 1600),
                 ),
                 animateExit: false,
                 secondaryVillainAnimation: VillainAnimation.fade(),
-                child: Row(
-                  children: <Widget>[
-                    Expanded(
-                      child: Text(
-                        "Connected Devices",
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold
-                        ),
-                      ),
+                child: Container(
+                  alignment: Alignment.centerLeft,
+                  margin: EdgeInsets.only(bottom: 8),
+                  child: Text(
+                    "Favourite Devices",
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold
                     ),
-                    IconButton(
-                      icon: Icon(Icons.add, color: Colors.white),
-                      onPressed: (){
-                        Navigator.of(context).push(PageTransition(type: PageTransitionType.rippleRightUp, child: AddDevicePage(),duration: Duration(milliseconds: 400)));
-                      }
-                    )
-                  ],
-                ),
+                  ),
+                )
               )
             ),
-            SingleChildScrollView(
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  Expanded(
-                    child: Container(
-                      height: 240,
-                      margin: EdgeInsets.only(right: 4),
-                      child: DeviceWidgetsLeft()
-                    )
-                  ),
-                  Expanded(
-                    child: Container(
-                      height: 240,
-                      margin: EdgeInsets.only(left: 4),
-                      child: DeviceWidgetsRight()
-                    )
-                  ),
-                ],
-              ),
+            Expanded(
+              child: CreateDeviceWidgets()
             )
           ],
         ),
