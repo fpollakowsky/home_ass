@@ -48,38 +48,36 @@ Future<bool> getDeviceIDs()async{
 
 Future<bool> getDeviceInformation()async{
   var conn = await MySqlConnection.connect(connSettings);
-  for(var i = 0; i<deviceIDs.length; i++){
-    var result = await conn.query('SELECT id,type,thing_name,val,isFavouriteBy FROM devices WHERE id= ?', [deviceIDs[i]]);
-    for (var row in result){
-      if (row != null){
-        allDevices[0].add(row[0]);
-        allDevices[2].add(row[1]);
-        allDevices[3].add(row[2]);
-        allDevices[5].add(row[3]);
-        allDevices[1].add(row[4]);
+  var result = await conn.query('SELECT id,type,thing_name,val,isFavouriteBy FROM devices ORDER BY isFavouriteBy DESC');
+  for (var row in result){
+    if (row != null){
+      allDevices[0].add(row[0]);
+      allDevices[2].add(row[1]);
+      allDevices[3].add(row[2]);
+      allDevices[5].add(row[3]);
+      allDevices[1].add(row[4]);
 
-        switch(row[1]){
-          case "socket":
-            break;
-          case "switch":
-            break;
-          case "blinder":
-            allDevices[4].add("lib/assets/shutter.png");
-            break;
-          case "light":
-            allDevices[4].add("lib/assets/lightbulb.png");
-            break;
-          case "fridge":
-            break;
-          case "sensor_weather":
-            break;
-          case "thermostat":
-            break;
-          case "fan":
-            break;
-          case "speaker":
-            break;
-        }
+      switch(row[1]){
+        case "socket":
+          break;
+        case "switch":
+          break;
+        case "blinder":
+          allDevices[4].add("lib/assets/shutter.png");
+          break;
+        case "light":
+          allDevices[4].add("lib/assets/lightbulb.png");
+          break;
+        case "fridge":
+          break;
+        case "sensor_weather":
+          break;
+        case "thermostat":
+          break;
+        case "fan":
+          break;
+        case "speaker":
+          break;
       }
     }
   }
