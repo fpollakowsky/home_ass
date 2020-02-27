@@ -21,13 +21,12 @@ class CustomSwitchHorizontal extends StatefulWidget {
   final Function onTap;
   final Function onDoubleTap;
   final Function onSwipe;
-  final int offset;
   final double height;
   final double width;
   final double borderRadius;
 
   CustomSwitchHorizontal(
-      {this.value = false,
+      {this.value,
         this.textOff = "Off",
         this.textOn = "On",
         this.textSize = 14,
@@ -41,7 +40,6 @@ class CustomSwitchHorizontal extends StatefulWidget {
         this.onDoubleTap,
         this.onSwipe,
         this.onChanged,
-        this.offset,
         this.height = 40,
         this.width = 96,
         this.borderRadius = 24,
@@ -50,7 +48,6 @@ class CustomSwitchHorizontal extends StatefulWidget {
   @override
   _CustomSwitchHorizontal createState() => _CustomSwitchHorizontal();
 }
-
 class _CustomSwitchHorizontal extends State<CustomSwitchHorizontal>
   with SingleTickerProviderStateMixin {
   AnimationController animationController;
@@ -69,12 +66,15 @@ class _CustomSwitchHorizontal extends State<CustomSwitchHorizontal>
   void initState() {
     super.initState();
     animationController = AnimationController(
-        vsync: this,
-        lowerBound: 0.0,
-        upperBound: 1.0,
-        duration: widget.animationDuration);
-    animation =
-        CurvedAnimation(parent: animationController, curve: Curves.easeInOut);
+      vsync: this,
+      lowerBound: 0.0,
+      upperBound: 1.0,
+      duration: widget.animationDuration
+    );
+    animation = CurvedAnimation(
+      parent: animationController,
+      curve: Curves.easeInOut
+    );
     animationController.addListener(() {
       setState(() {
         value = animation.value;
@@ -122,9 +122,9 @@ class _CustomSwitchHorizontal extends State<CustomSwitchHorizontal>
                   child: Text(
                     widget.textOff,
                     style: TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                        fontSize: widget.textSize),
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                      fontSize: widget.textSize),
                   ),
                 ),
               ),
@@ -140,9 +140,9 @@ class _CustomSwitchHorizontal extends State<CustomSwitchHorizontal>
                   child: Text(
                     widget.textOn,
                     style: TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                        fontSize: widget.textSize),
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                      fontSize: widget.textSize),
                   ),
                 ),
               ),
@@ -208,6 +208,7 @@ class _CustomSwitchHorizontal extends State<CustomSwitchHorizontal>
     });
   }
 }
+
 class CustomSwitchVertical extends StatefulWidget {
   @required
   final bool value;
@@ -215,7 +216,6 @@ class CustomSwitchVertical extends StatefulWidget {
   final Function(bool) onChanged;
   final Color colorOn;
   final Color colorOff;
-  final double textSize;
   final Duration animationDuration;
   final Function onTap;
   final Function onDoubleTap;
@@ -227,7 +227,6 @@ class CustomSwitchVertical extends StatefulWidget {
 
   CustomSwitchVertical(
       {this.value = false,
-        this.textSize = 14,
         this.colorOn = Colors.green,
         this.colorOff = Colors.red,
         this.animationDuration = const Duration(milliseconds: 600),
@@ -244,7 +243,6 @@ class CustomSwitchVertical extends StatefulWidget {
   @override
   _CustomSwitchVertical createState() => _CustomSwitchVertical();
 }
-
 class _CustomSwitchVertical extends State<CustomSwitchVertical>
     with SingleTickerProviderStateMixin {
   AnimationController animationController;
@@ -299,6 +297,7 @@ class _CustomSwitchVertical extends State<CustomSwitchVertical>
         if (widget.onSwipe != null) widget.onSwipe();
         //widget.onSwipe();
       },
+
       child: Container(
         padding: EdgeInsets.all(4),
         width: widget.width,
@@ -308,7 +307,7 @@ class _CustomSwitchVertical extends State<CustomSwitchVertical>
         child: Stack(
           children: <Widget>[
             Transform.translate(
-              offset: Offset(0, ((widget.height - containerHeight) - 8 )* value),
+              offset: Offset(0, ((widget.height - containerHeight) - 8) * value),
               child: Container(
                 height: containerHeight,
                 alignment: Alignment.center,

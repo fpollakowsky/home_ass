@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_villains/villain.dart';
 import 'package:home_ass/pages/home.dart';
 import 'package:home_ass/utils/res/colors.dart';
+import 'package:home_ass/utils/res/global.dart';
 import 'package:home_ass/utils/res/styles.dart';
 import 'package:home_ass/utils/res/transitions.dart';
 
@@ -25,7 +26,7 @@ class _ProfilePage extends State<ProfilePage> {
   @override
   Widget build(BuildContext context) {
     return Material(
-      color: primaryDarkColor,
+      color: themeColor,
       child: SafeArea(
         child: Container(
           alignment: Alignment.center,
@@ -70,7 +71,7 @@ class _ProfilePage extends State<ProfilePage> {
                       ),
                       secondaryVillainAnimation: VillainAnimation.fade(),
                       child: Text(
-                        "Florian Pollakowsky",
+                        valName,
                         style: profileH1,
                       ),
                     )
@@ -92,7 +93,7 @@ class _ProfilePage extends State<ProfilePage> {
                       animateExit: true,
                       secondaryVillainAnimation: VillainAnimation.fade(),
                       child: Text(
-                        "@" + "nickname",
+                        "@" + valNick,
                         style: profileH4,
                       ),
                     )

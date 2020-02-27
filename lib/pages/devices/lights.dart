@@ -49,7 +49,6 @@ class AllLights extends StatelessWidget {
                     iconOn: Icons.done,
                     iconOff: Icons.remove_circle_outline,
                     textSize: 16,
-                    offset: 48,
                     onChanged: (bool state) {
 
                     },

@@ -22,7 +22,7 @@ class _HomeScreenState extends State<HomeScreen>
   TabController _tabController;
   int _selectedIndex = 0;
   static ScrollController _scrollViewController;
-  static List<Widget> _widgetOptions = <Widget>[
+  List<Widget> _widgetOptions = <Widget>[
     DashboardIndex(),
     ScenesIndex(),
     SettingsIndex()
@@ -52,7 +52,7 @@ class _HomeScreenState extends State<HomeScreen>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: primaryDarkColor,
+      backgroundColor: themeColor,
         bottomNavigationBar: BottomNavigationBar(
           items: const <BottomNavigationBarItem>[
             BottomNavigationBarItem(

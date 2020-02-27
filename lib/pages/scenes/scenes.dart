@@ -14,7 +14,7 @@ class _ScenesIndex extends State<ScenesIndex> {
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
-      backgroundColor: primaryDarkColor,
+      backgroundColor: themeColor,
       body: Container(
         alignment: Alignment.center,
         child: CustomSwitchVertical(
@@ -22,7 +22,6 @@ class _ScenesIndex extends State<ScenesIndex> {
           width: 96,
           borderRadius: 4,
           value: true,
-          textSize: 0,
           colorOn: Colors.green,
           colorOff: primaryColor,
           animationDuration: Duration(milliseconds: 200),

@@ -1,8 +1,12 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_villains/villain.dart';
+import 'package:home_ass/pages/support/chat.dart';
+import 'package:home_ass/utils/firebase.dart';
 import 'package:home_ass/utils/res/colors.dart';
 import 'package:home_ass/utils/res/styles.dart';
+import 'package:home_ass/utils/res/transitions.dart';
 
 final List<String> topicList = <String>['Setup Devices','Gateway','Privacy','Other','Bug Report'];
 
@@ -12,10 +16,25 @@ class SupportPage extends StatefulWidget {
 }
 
 class _SupportPage extends State<SupportPage> {
+  signInAnonymously() async {
+    final FirebaseAuth _auth = FirebaseAuth.instance;
+
+    try {
+      FirebaseUser firebaseUser = (await _auth.signInAnonymously()).user;
+      if(isUserSignedIn() == true){
+        var usrID = firebaseUser.uid;
+        print("usrID: " + usrID);
+        Navigator.of(context).push(FadeRouteBuilder(page: Chat(currentUserID: usrID)));
+      }
+    } catch (e) {
+      print(e);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Material(
-      color: primaryDarkColor,
+      color: themeColor,
       child: SafeArea(
           child: Container(
             alignment: Alignment.center,
@@ -54,7 +73,7 @@ class _SupportPage extends State<SupportPage> {
                             borderRadius: BorderRadius.all(Radius.circular(16)),
                             child: InkWell(
                               borderRadius: BorderRadius.all(Radius.circular(16)),
-                              onTap: (){},
+                              onTap: signInAnonymously(),
                               child: Container(
                                   margin: EdgeInsets.only(bottom: 8, left: 8, right: 8),
                                   padding: EdgeInsets.all(16),

@@ -21,7 +21,7 @@ const TextStyle settingsH4G = TextStyle(fontSize: 14, color: Colors.grey, letter
 
 const OutlineInputBorder focusedBorder = OutlineInputBorder(
   borderRadius: BorderRadius.all(Radius.circular(4)),
-  borderSide: BorderSide(width: 2,color: primaryColor),
+  borderSide: BorderSide(width: 2,color: Color(0xffbf360c)),
 );
 
 const OutlineInputBorder border = OutlineInputBorder(

@@ -5,6 +5,7 @@ import 'package:home_ass/pages/dashboard/dashboard.dart';
 import 'package:home_ass/utils/mysql/getRequests.dart';
 import 'package:home_ass/utils/mysql/setRequest.dart';
 import 'package:home_ass/utils/res/colors.dart';
+import 'package:home_ass/utils/res/global.dart';
 import 'package:home_ass/utils/res/styles.dart';
 import 'package:home_ass/utils/res/transitions.dart';
 import 'package:home_ass/utils/ui-elements/custom_buttons.dart';
@@ -14,8 +15,10 @@ bool buttonState = false;
 class CreateDeviceWidgets extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
+    milliStart = 1100;
+    milliEnd = 1800;
     return ListView.builder(
-      itemCount: 3,
+      itemCount: 4,
       // ignore: missing_return
       itemBuilder: (BuildContext context, int index){
         if(allDevices[1][index] == "fpollakowsky"){
@@ -68,7 +71,7 @@ class CreateDeviceWidgets extends StatelessWidget{
                         ),
                       ),
                       Container(
-                          margin: EdgeInsets.only(right: 8),
+                          margin: EdgeInsets.only(right: 16, top: 8, bottom: 8),
                           child: isBlinder(index, true)
                       )
                     ]
@@ -110,11 +113,10 @@ isBlinder(int index, bool isRight){
   if (allDevices[2][index] == "blinder"){
     setAnimationTime();
     return CustomSwitchVertical(
-      height: 42,
-      width: 24,
+      height: 58,
+      width: 26,
       borderRadius: 4,
       value: buttonState,
-      textSize: 0,
       colorOn: Colors.green,
       colorOff: primaryColor,
       animationDuration: Duration(milliseconds: 200),
@@ -128,14 +130,13 @@ isBlinder(int index, bool isRight){
     milliStart = milliStart + 100;
     milliEnd = milliEnd + 100;
     return CustomSwitchHorizontal(
-      height: 24,
-      width: 42,
+      height: 32,
+      width: 64,
       borderRadius: 4,
       value: buttonState,
-      textSize: 0,
       colorOn: Colors.green,
       colorOff: primaryColor,
-      iconSize: 0,
+      iconSize: 20,
       iconOn: Icons.done,
       iconOff: Icons.remove_circle_outline,
       animationDuration: Duration(milliseconds: 200),

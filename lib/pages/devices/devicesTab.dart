@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_page_transition/flutter_page_transition.dart';
 import 'package:flutter_villains/villain.dart';
 import 'package:home_ass/pages/devices/lights.dart';
 import 'package:home_ass/pages/devices/sockets.dart';
@@ -116,7 +115,7 @@ class _DevicesTab extends State<DevicesTab> {
         child: SafeArea(
           child: Container(
             decoration: BoxDecoration(
-              color: primaryDarkColor,
+              color: themeColor,
             ),
             child: Column(
               children: <Widget>[
@@ -132,6 +131,7 @@ class _DevicesTab extends State<DevicesTab> {
                         mainAxisSize: MainAxisSize.max,
                         children: <Widget>[
                           IconButton(
+                            iconSize: 32,
                             icon: Icon(
                                 Icons.arrow_back,
                                 color: Colors.white
@@ -145,19 +145,19 @@ class _DevicesTab extends State<DevicesTab> {
                             },
                           ),
                           Expanded(
-                            child: Container(
-                              padding: EdgeInsets.only(left: 8),
-                              child: Text(
-                                widget.roomName,
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 22
-                                ),
+                            child: Text(
+                              widget.roomName,
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 22
                               ),
                             ),
                           ),
+                          Container(
+                            width: 48,
+                          )
                         ],
                       ),
                     ),
