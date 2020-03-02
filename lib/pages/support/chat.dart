@@ -118,14 +118,14 @@ class ChatScreenState extends State<ChatScreen> {
       chatID = '$peerId-$currentUserID';
     }
 
-    Firestore.instance.collection('users').document(currentUserID).updateData({'chattingWith': peerId});
+    //Firestore.instance.collection('users').document(currentUserID).updateData({'chattingWith': peerId});
 
     setState(() {});
   }
 
   // set chatting with var
   Future<bool> onBackPress() {
-    Firestore.instance.collection('users').document(currentUserID).updateData({'chattingWith': null});
+    //Firestore.instance.collection('users').document(currentUserID).updateData({'chattingWith': null});
     Navigator.pop(context);
 
     return Future.value(false);

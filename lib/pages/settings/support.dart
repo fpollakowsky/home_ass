@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -21,6 +22,24 @@ class _SupportPage extends State<SupportPage> {
 
     try {
       FirebaseUser firebaseUser = (await _auth.signInAnonymously()).user;
+      if (firebaseUser != null) {
+        // Check is already sign up
+        final QuerySnapshot result =
+        await Firestore.instance.collection('users').where(
+            'id', isEqualTo: firebaseUser.uid).getDocuments();
+        final List<DocumentSnapshot> documents = result.documents;
+        if (documents.length == 0) {
+          Firestore.instance.collection('users')
+              .document(firebaseUser.uid)
+              .setData({
+            'id': firebaseUser.uid,
+            'createdAt': DateTime
+                .now()
+                .millisecondsSinceEpoch
+                .toString(),
+          });
+        }
+      }
       if(isUserSignedIn() == true){
         var usrID = firebaseUser.uid;
         print("usrID: " + usrID);
@@ -33,6 +52,7 @@ class _SupportPage extends State<SupportPage> {
 
   @override
   Widget build(BuildContext context) {
+    signInAnonymously();
     return Material(
       color: themeColor,
       child: SafeArea(
@@ -73,7 +93,7 @@ class _SupportPage extends State<SupportPage> {
                             borderRadius: BorderRadius.all(Radius.circular(16)),
                             child: InkWell(
                               borderRadius: BorderRadius.all(Radius.circular(16)),
-                              onTap: signInAnonymously(),
+                              onTap: (){},
                               child: Container(
                                   margin: EdgeInsets.only(bottom: 8, left: 8, right: 8),
                                   padding: EdgeInsets.all(16),
