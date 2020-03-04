@@ -108,133 +108,133 @@ class _DevicesTab extends State<DevicesTab> {
 
   @override
   Widget build(BuildContext context) {
-    return  WillPopScope(
-      onWillPop: () async => false,
-      child: Material(
-        color: primaryColor,
-        child: SafeArea(
-          child: Container(
-            decoration: BoxDecoration(
-              color: themeColor,
-            ),
-            child: Column(
-              children: <Widget>[
-                Hero(
-                  tag: widget.roomName,
-                  child: Material(
-                    child: AnimatedContainer(
-                      duration: Duration(seconds: 1),
-                      padding: EdgeInsets.symmetric(horizontal: 16),
-                      height: 62,
-                      color: primaryColor,
-                      child: Row(
-                        mainAxisSize: MainAxisSize.max,
-                        children: <Widget>[
-                          IconButton(
-                            iconSize: 32,
-                            icon: Icon(
-                                Icons.arrow_back,
-                                color: Colors.white
-                            ),
-                            onPressed: (){
-                              opacity = 0;
-                              setState(() {
+    return WillPopScope(
+        onWillPop: () async => false,
+        child: Material(
+            color: primaryColor,
+            child: SafeArea(
+                child: Container(
+                  decoration: BoxDecoration(
+                    color: themeColor,
+                  ),
+                  child: Column(
+                    children: <Widget>[
+                      Hero(
+                          tag: widget.roomName,
+                          child: Material(
+                            child: AnimatedContainer(
+                              duration: Duration(seconds: 1),
+                              padding: EdgeInsets.symmetric(horizontal: 16),
+                              height: 62,
+                              color: primaryColor,
+                              child: Row(
+                                mainAxisSize: MainAxisSize.max,
+                                children: <Widget>[
+                                  IconButton(
+                                    iconSize: 32,
+                                    icon: Icon(
+                                        Icons.arrow_back,
+                                        color: Colors.white
+                                    ),
+                                    onPressed: (){
+                                      opacity = 0;
+                                      setState(() {
 
-                              });
-                              Navigator.pop(context);
-                            },
-                          ),
-                          Expanded(
-                            child: Text(
-                              widget.roomName,
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 22
+                                      });
+                                      Navigator.pop(context);
+                                    },
+                                  ),
+                                  Expanded(
+                                    child: Text(
+                                      widget.roomName,
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 22
+                                      ),
+                                    ),
+                                  ),
+                                  Container(
+                                    width: 48,
+                                  )
+                                ],
                               ),
                             ),
-                          ),
-                          Container(
-                            width: 48,
                           )
-                        ],
                       ),
-                    ),
-                  )
-                ),
-                Villain(
-                  villainAnimation: VillainAnimation.fromBottom(
-                    relativeOffset: 0.4,
-                    from: Duration(milliseconds: 200),
-                    to: Duration(seconds: 1),
-                  ),
-                  animateExit: true,
-                  secondaryVillainAnimation: VillainAnimation.fade(),
-                  child: Container(
-                      height: 98,
-                      child: ListView.builder(
-                          scrollDirection: Axis.horizontal,
-                          itemCount: deviceNames.length,
-                          itemBuilder: (BuildContext context, int index){
-                            return Container(
-                                margin: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  children: <Widget>[
-                                    Container(
-                                        child: IconButton(
-                                          iconSize: iconSize,
-                                          icon: Image(
-                                            image: AssetImage(deviceIcons[index]),
-                                            color: listColor[index],
+                      Villain(
+                        villainAnimation: VillainAnimation.fromBottom(
+                          relativeOffset: 0.4,
+                          from: Duration(milliseconds: 200),
+                          to: Duration(seconds: 1),
+                        ),
+                        animateExit: true,
+                        secondaryVillainAnimation: VillainAnimation.fade(),
+                        child: Container(
+                            height: 98,
+                            child: ListView.builder(
+                                scrollDirection: Axis.horizontal,
+                                itemCount: deviceNames.length,
+                                itemBuilder: (BuildContext context, int index){
+                                  return Container(
+                                      margin: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                                      child: Column(
+                                        crossAxisAlignment: CrossAxisAlignment.center,
+                                        children: <Widget>[
+                                          Container(
+                                              child: IconButton(
+                                                iconSize: iconSize,
+                                                icon: Image(
+                                                  image: AssetImage(deviceIcons[index]),
+                                                  color: listColor[index],
+                                                ),
+                                                onPressed: (){
+                                                  for(var i = 0; i<listColor.length; i++){
+                                                    listColor[i] = Colors.grey;
+                                                  }
+                                                  _controller.animateToPage(index, duration: Duration(seconds: 1), curve: Curves.decelerate);
+                                                  listColor[index] = primaryColor;
+                                                  setState(() {});
+                                                },
+                                              )
                                           ),
-                                          onPressed: (){
-                                            for(var i = 0; i<listColor.length; i++){
-                                              listColor[i] = Colors.grey;
-                                            }
-                                            _controller.animateToPage(index, duration: Duration(seconds: 1), curve: Curves.decelerate);
-                                            listColor[index] = primaryColor;
-                                            setState(() {});
-                                          },
-                                        )
-                                    ),
-                                    Container(
-                                      margin: EdgeInsets.only(top: 8),
-                                      child: Text(
-                                        deviceNames[index],
-                                        style: TextStyle(
-                                            color: listColor[index],
-                                            fontWeight: FontWeight.bold
-                                        ),
-                                      ),
-                                    )
-                                  ],
-                                )
-                            );
-                          }
-                      )
-                  ),
-                ),
-                Expanded(
-                  child: PageView(
-                    physics: NeverScrollableScrollPhysics(),
-                    controller: _controller,
-                    children: <Widget>[
-                      AllLights(),
-                      Thermostats(),
-                      Thermostats(),
-                      Thermostats(),
-                      Thermostats(),
-                      Sockets(),
+                                          Container(
+                                            margin: EdgeInsets.only(top: 8),
+                                            child: Text(
+                                              deviceNames[index],
+                                              style: TextStyle(
+                                                  color: listColor[index],
+                                                  fontWeight: FontWeight.bold
+                                              ),
+                                            ),
+                                          )
+                                        ],
+                                      )
+                                  );
+                                }
+                            )
+                        ),
+                      ),
+                      Expanded(
+                        child: PageView(
+                          physics: NeverScrollableScrollPhysics(),
+                          controller: _controller,
+                          children: <Widget>[
+                            AllLights(),
+                            Thermostats(),
+                            Thermostats(),
+                            Thermostats(),
+                            Thermostats(),
+                            Sockets(),
+                          ],
+                        ),
+                      ),
                     ],
                   ),
-                ),
-              ],
-            ),
-          )
-        )
-      ),
-    );
+                )
+            )
+        ),
+      );
   }
 }

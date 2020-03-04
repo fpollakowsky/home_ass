@@ -7,7 +7,6 @@ const TextStyle optionStyle = TextStyle(fontSize: 30, fontWeight: FontWeight.bol
 // General
 const TextStyle H1B = TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Colors.white,decoration: TextDecoration.none);
 const TextStyle H1 = TextStyle(fontSize: 24, color: Colors.white,decoration: TextDecoration.none);
-const TextStyle H2B = TextStyle(fontSize: 22, fontWeight: FontWeight.bold, color: Colors.white,decoration: TextDecoration.none);
 const TextStyle H2 = TextStyle(fontSize: 22, color: Colors.white,decoration: TextDecoration.none);
 const TextStyle H3 = TextStyle(fontSize: 18, color: Colors.white,decoration: TextDecoration.none);
 const TextStyle H4G = TextStyle(fontSize: 14, color: Colors.grey,decoration: TextDecoration.none);

@@ -4,18 +4,16 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_villains/villain.dart';
-import 'package:home_ass/pages/home.dart';
 import 'package:home_ass/utils/res/colors.dart';
 import 'package:home_ass/utils/res/global.dart';
-import 'package:home_ass/utils/res/transitions.dart';
 
 String txtGateway;
 
-class OnBoardThird extends StatefulWidget{
-  _OnBoardThird createState() => _OnBoardThird();
+class AddDevice extends StatefulWidget{
+  _AddDeviceState createState() => _AddDeviceState();
 }
 
-class _OnBoardThird extends State<OnBoardThird> {
+class _AddDeviceState extends State<AddDevice> {
   startTimeout([int milliseconds]) {
     Timer(Duration(seconds: 5), () {
       initDashboard(context, true);

@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_villains/villain.dart';
-import 'package:home_ass/pages/onBoard/second.dart';
+import 'package:home_ass/pages/onBoard/2.dart';
 import 'package:home_ass/utils/res/colors.dart';
 import 'package:home_ass/utils/res/global.dart';
 import 'package:home_ass/utils/res/transitions.dart';
@@ -31,9 +31,6 @@ class _OnBoardFirst extends State<OnBoardFirst> {
     SystemChrome.setEnabledSystemUIOverlays([]);
     return MaterialApp(
         debugShowCheckedModeBanner: false,
-        theme: ThemeData(
-          fontFamily: 'Roboto',
-        ),
         home: Material(
             color: themeColor,
             child: SafeArea(

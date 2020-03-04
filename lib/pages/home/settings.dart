@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_page_transition/flutter_page_transition.dart';
 import 'package:flutter_villains/villain.dart';
+import 'package:home_ass/pages/settings/accounts.dart';
 import 'package:home_ass/pages/settings/profile.dart';
 import 'package:home_ass/pages/settings/support.dart';
 import 'package:home_ass/utils/res/colors.dart';
@@ -12,12 +13,12 @@ import 'package:home_ass/utils/res/transitions.dart';
 import 'package:home_ass/utils/settingsPage.dart';
 import 'package:home_ass/utils/ui-elements/custom_buttons.dart';
 
-class SettingsIndex extends StatefulWidget{
+class Settings extends StatefulWidget{
   @override
   _SettingsIndex createState() => _SettingsIndex();
 }
 
-class _SettingsIndex extends State<SettingsIndex>
+class _SettingsIndex extends State<Settings>
   with SingleTickerProviderStateMixin{
 
   @override
@@ -28,8 +29,9 @@ class _SettingsIndex extends State<SettingsIndex>
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setEnabledSystemUIOverlays([]);
     return Material(
-      color: themeColor,
+      color: secondaryColor,
       child: SafeArea(
         child: Column(
           children: <Widget>[
@@ -53,8 +55,7 @@ class _SettingsIndex extends State<SettingsIndex>
                             width: 72,
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.all(Radius.circular(16)),
-                              color: primaryColor,
-                              //image: DecorationImage(image: NetworkImage("https://via.placeholder.com/72"),),
+                              image: DecorationImage(image: AssetImage("images/male_profile.png")),
                             )
                           ),
                         )
@@ -487,29 +488,29 @@ class _SettingsIndex extends State<SettingsIndex>
                               )
                           ),
                           Container(
-                              margin: EdgeInsets.only(bottom: 4),
-                              child: Column(
-                                children: <Widget>[
-                                  Row(
-                                    children: <Widget>[
-                                      Icon(Icons.account_circle,size: 32, color: primaryColor),
-                                      Expanded(
-                                        child: Container(
-                                          margin: EdgeInsets.only(left: 8),
-                                          child: Text("Manage Accounts", style: settingsH3),
-                                        ),
+                            margin: EdgeInsets.only(bottom: 4),
+                            child: Column(
+                              children: <Widget>[
+                                Row(
+                                  children: <Widget>[
+                                    Icon(Icons.account_circle,size: 32, color: primaryColor),
+                                    Expanded(
+                                      child: Container(
+                                        margin: EdgeInsets.only(left: 8),
+                                        child: Text("Manage Accounts", style: settingsH3),
                                       ),
-                                      IconButton(
-                                        icon: Icon(Icons.navigate_next, size: 32),
-                                        color: Colors.grey,
-                                        onPressed: (){
-                                          Navigator.of(context).push(PageTransition(type: PageTransitionType.rippleRightUp, child: SupportPage(),duration: Duration(milliseconds: 400)));
-                                        },
-                                      ),
-                                    ],
-                                  ),
-                                ],
-                              )
+                                    ),
+                                    IconButton(
+                                      icon: Icon(Icons.navigate_next, size: 32),
+                                      color: Colors.grey,
+                                      onPressed: (){
+                                        Navigator.of(context).push(PageTransition(type: PageTransitionType.rippleRightUp, child: AccountsPage(),duration: Duration(milliseconds: 400)));
+                                      },
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            )
                           ),
                           Container(
                             margin: EdgeInsets.only(bottom: 4),

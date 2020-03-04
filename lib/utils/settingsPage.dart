@@ -6,7 +6,7 @@ containerAnimation(int index){
   if(containerHeight[index] == 0){
     switch(index){
       case 0:
-        containerHeight[index] = 195;
+        containerHeight[index] = 201;
         break;
       case 1:
         containerHeight[index] = 79;

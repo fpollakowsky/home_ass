@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:io';
 
 import 'package:home_ass/utils/res/colors.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -7,51 +6,27 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:home_ass/utils/time.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-
-class Chat extends StatelessWidget {
-  final String currentUserID;
-
-  Chat({Key key, @required this.currentUserID}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return new Scaffold(
-      body: new ChatScreen(
-        currentUserID: currentUserID,
-        peerId: "cvoFk0PKcoSri1iJ16aTdL0Ahrw2",
-      ),
-    );
-  }
-}
 
 class ChatScreen extends StatefulWidget {
-  final String peerId;
+  final String topic;
   final String currentUserID;
 
-  ChatScreen({Key key, @required this.peerId, this.currentUserID}) : super(key: key);
+  ChatScreen({Key key, this.currentUserID, this.topic}) : super(key: key);
 
   @override
-  State createState() => new ChatScreenState(peerId: peerId, currentUserID: currentUserID);
+  State createState() => new ChatScreenState(currentUserID: currentUserID, topic: topic);
 }
 
 class ChatScreenState extends State<ChatScreen> {
   ChatScreenState({Key key,
-    @required this.peerId,
+    @required this.topic,
     @required this.currentUserID
   });
 
-  String peerId;
-  String currentUserID;
-
+  String topic, chatID, currentUserID;
+  String supportId = "CyF6ii4gq8Vrbv6GOtFhnB5ajtq2";
   var listMessage;
-  String chatID;
-  SharedPreferences prefs;
-
-  File imageFile;
   bool isLoading;
-  bool isShowSticker;
-  String imageUrl;
 
   final TextEditingController textEditingController = new TextEditingController();
   final ScrollController listScrollController = new ScrollController();
@@ -60,28 +35,13 @@ class ChatScreenState extends State<ChatScreen> {
   @override
   void initState() {
     super.initState();
-    focusNode.addListener(onFocusChange);
-
     chatID = '';
-
     isLoading = false;
-    isShowSticker = false;
-    imageUrl = '';
 
     setChatID();
   }
 
-  onFocusChange() {
-    if (focusNode.hasFocus) {
-      // Hide sticker when keyboard appear
-      setState(() {
-        isShowSticker = false;
-      });
-    }
-  }
-
-  onSendMessage(String content, int type) {
-    // type: 0 = text, 1 = image, 2 = sticker
+  onSendMessage(String content) {
     if (content.trim() != '') {
       textEditingController.clear();
       var documentReference = Firestore.instance
@@ -95,10 +55,10 @@ class ChatScreenState extends State<ChatScreen> {
           documentReference,
           {
             'idFrom': currentUserID,
-            'idTo': peerId,
+            'idTo': supportId,
             'timestamp': getTimeNow(1, DateTime.now()),
             'content': content,
-            'type': type
+            'topic': topic,
           },
         );
       });
@@ -107,31 +67,19 @@ class ChatScreenState extends State<ChatScreen> {
       Fluttertoast.showToast(msg: 'Nothing to send');
     }
   }
-
-  // set chat id
   setChatID() async {
-    prefs = await SharedPreferences.getInstance();
-
-    if (currentUserID.hashCode <= peerId.hashCode) {
-      chatID = '$currentUserID-$peerId';
+    if (currentUserID.hashCode <= supportId.hashCode) {
+      chatID = '$currentUserID-$supportId-$topic';
     } else {
-      chatID = '$peerId-$currentUserID';
+      chatID = '$supportId-$currentUserID-$topic';
     }
-
-    //Firestore.instance.collection('users').document(currentUserID).updateData({'chattingWith': peerId});
-
     setState(() {});
   }
-
-  // set chatting with var
   Future<bool> onBackPress() {
-    //Firestore.instance.collection('users').document(currentUserID).updateData({'chattingWith': null});
     Navigator.pop(context);
 
     return Future.value(false);
   }
-
-  // Loading screen
   Widget buildLoading() {
     return Positioned(
       child: isLoading ? Container(
@@ -143,17 +91,15 @@ class ChatScreenState extends State<ChatScreen> {
           : Container(),
     );
   }
-
-  // TextField for messages
   Widget buildTextInput() {
     return Row(
       children: <Widget>[
         Flexible(
           child: Container(
-            margin: EdgeInsets.only(left: 8, right: 4, top: 1, bottom: 4),
+            margin: EdgeInsets.only(left: 8, right: 4, top: 1, bottom: 8),
             padding: EdgeInsets.only(left: 12),
             decoration: BoxDecoration(
-                color: primaryColor,
+                color: secondaryColor,
                 borderRadius: BorderRadius.all(Radius.circular(16))
             ),
             child: TextField(
@@ -175,14 +121,14 @@ class ChatScreenState extends State<ChatScreen> {
           ),
         ),
         Container(
-          margin: EdgeInsets.only(right: 8),
+          margin: EdgeInsets.only(right: 8,bottom: 8),
           decoration: BoxDecoration(
-              color: themeColor,
+              color: secondaryColor,
               borderRadius: BorderRadius.all(Radius.circular(16))
           ),
           child: IconButton(
             icon: Icon(Icons.send),
-            onPressed: () => onSendMessage(textEditingController.text, 0),
+            onPressed: () => onSendMessage(textEditingController.text),
             color: Colors.white,
           ),
         )
@@ -195,7 +141,7 @@ class ChatScreenState extends State<ChatScreen> {
   Widget build(BuildContext context) {
     return WillPopScope(
       child: StreamBuilder(
-        stream: Firestore.instance.collection('users').where('id', isEqualTo: peerId).snapshots(),
+        stream: Firestore.instance.collection('requests').where('id', isEqualTo: supportId).snapshots(),
         builder: (context, snapshot) {
           if (!snapshot.hasData) {
             return Center(
@@ -205,23 +151,23 @@ class ChatScreenState extends State<ChatScreen> {
             );
           } else {
             var document = snapshot.data.documents[0];
-            return Scaffold(
-              primary: true,
-              appBar: CustomAppBar(ds: document,),
-              body: Stack(
-                children: <Widget>[
-                  Column(
+            return Material(
+              color: secondaryColor,
+              child: SafeArea(
+                child: Scaffold(
+                  bottomNavigationBar: Container(margin: EdgeInsets.only(bottom: 8),child: buildTextInput(),),
+                  appBar: CustomAppBar(ds: document,topic: topic,),
+                  body: Stack(
                     children: <Widget>[
-                      // List of messages
-                      buildListMessage(),
-                      // Input content
-                      buildTextInput(),
+                      Column(
+                        children: <Widget>[
+                          buildListMessage(),
+                        ],
+                      ),
+                      buildLoading()
                     ],
                   ),
-
-                  // Loading
-                  buildLoading()
-                ],
+                ),
               ),
             );
           }
@@ -232,7 +178,7 @@ class ChatScreenState extends State<ChatScreen> {
   }
 
   Widget buildItem(int index, DocumentSnapshot ds, idFrom, timestamp) {
-    if (idFrom == peerId){
+    if (idFrom == supportId){
       return Row(
         children: <Widget>[
           Flexible(
@@ -342,54 +288,49 @@ class ChatScreenState extends State<ChatScreen> {
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final DocumentSnapshot ds;
+  final String topic;
 
   const CustomAppBar({
     Key key,
-    @required this.ds
+    @required this.ds, this.topic
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
-        color: Colors.deepOrange,
-        child: Container(
-          margin: EdgeInsets.only(bottom: 8),
-          child: Row(
-            children: <Widget>[
-              Container(
-                child: IconButton(
-                  icon: Icon(Icons.arrow_back),
-                  color: Colors.white,
-                  onPressed: () {Navigator.pop(context);},
-                ),
-              ),
-              Expanded(
-                  child: Container(
-                    margin: EdgeInsets.only(left: 8),
-                    child: Text(
-                      ds['nickname'],
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 18
-                      ),
-                    ),
+      color: secondaryColor,
+      child: Row(
+        children: <Widget>[
+          IconButton(
+            icon: Icon(Icons.arrow_back),
+            color: Colors.white,
+            onPressed: () => Navigator.pop(context),
+          ),
+          Expanded(
+            child: Container(
+              child: Text(
+                "Support - " + topic,
+                  style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
+                      decoration: TextDecoration.none
                   )
               ),
-              Container(
-                child: IconButton(
-                  icon: Icon(Icons.more_vert),
-                  color: Colors.white,
-                  onPressed: (){},
-                ),
-              )
-            ],
+            )
           ),
-        )
+          Container(
+            child: IconButton(
+              icon: Icon(Icons.more_vert),
+              color: Colors.white,
+              onPressed: (){},
+            ),
+          )
+        ],
+      ),
     );
   }
 
   @override
-  // TODO: implement preferredSize
-  Size get preferredSize => Size.fromHeight(64);
+  Size get preferredSize => Size.fromHeight(80);
 }

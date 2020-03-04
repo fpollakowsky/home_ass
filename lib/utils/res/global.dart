@@ -1,11 +1,14 @@
+import 'dart:convert';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:home_ass/pages/home.dart';
-import 'package:home_ass/pages/onBoard/first.dart';
-import 'package:home_ass/utils/mysql/getRequests.dart';
+import 'package:home_ass/utils/mysql/selectRequests.dart';
 import 'package:home_ass/utils/mysql/initMySQL.dart';
 import 'package:home_ass/utils/res/colors.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'dart:convert';
+
 
 bool valFirstStart;
 bool valNotification;
@@ -29,16 +32,14 @@ List<List<dynamic>> allDevices = [
   [], // Image
   []  // Value -> On / Off | 1 / 0
 ];
-final List<List<dynamic>> rooms = [
-  [], // Name
-  [], // Image
-  []  // Device count
-];
+var allDevices2 = [];
+var roomList = [];
+var routineList = [];
 
 initFirstSetup(){
-  setValueSharedPref("notification",false,"bool");
-  setValueSharedPref("darkmode",true,"bool");
-  setValueSharedPref("fingerprint",false,"bool");
+  setValueSharedPref("notification", false,"bool");
+  setValueSharedPref("darkmode", true,"bool");
+  setValueSharedPref("fingerprint", false,"bool");
 
   setValueSharedPref("abode","Living Room","string");
   setValueSharedPref("name","Unknown","string");
@@ -52,11 +53,13 @@ initDashboard(context, bool isStartup){
     if (val != "err"){
       setSensorData().then((val){
         setDeviceInformation().then((val){
-          setRoomNames().then((val){
+          setRoomList().then((val){
             setThemeMode();
-            if (isStartup == true){
-              Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => HomeScreen(index: 0,)));
-            }
+            setRoutinesInformation().then((val){
+              if (isStartup == true){
+                Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => HomeScreen(index: 0,)));
+              }
+            });
           });
         });
       });
@@ -108,42 +111,48 @@ loadSharedPreferences()async{
 
 setDeviceInformation()async{
   var result = await getDeviceInformation();
+  allDevices2.removeRange(0, allDevices2.length);
+
   for (var row in result){
     if (row != null){
+      allDevices2.add({
+        "ID": row[0],
+        "Type": row[1],
+        "Name": row[2],
+        "Value": row[3],
+        "isFavouriteBy": row[4],
+        "Image": getDeviceImage(row)
+      });
       allDevices[0].add(row[0]);
       allDevices[2].add(row[1]);
       allDevices[3].add(row[2]);
       allDevices[5].add(row[3]);
       allDevices[1].add(row[4]);
+    }
+  }
+}
 
-      switch(row[1]){
-        case "socket":
-          break;
-        case "switch":
-          break;
-        case "blinder":
-          allDevices[4].add("lib/assets/shutter.png");
-          break;
-        case "light":
-          allDevices[4].add("lib/assets/lightbulb.png");
-          break;
-        case "fridge":
-          break;
-        case "sensor_weather":
-          break;
-        case "thermostat":
-          break;
-        case "fan":
-          break;
-        case "speaker":
-          break;
-      }
+setRoutinesInformation()async{
+  var result = await getRoutinesInformation();
+  routineList.removeRange(0, routineList.length);
+
+  for(var row in result){
+    if(row != null){
+      routineList.add({
+        "Title": row[0].toString(),
+        "Weekdays": json.decode(row[1].toString()),
+        "Time": row[2],
+        "ID": row[3],
+        "isActive": row[4]
+      });
     }
   }
 }
 
 setSensorData()async{
   var result = await getSensorData();
+  sensorData.removeRange(0, sensorData.length);
+
   if (result.isNotEmpty){
     sensorData = result.first.values;
     if (sensorData[0] == null){
@@ -154,22 +163,67 @@ setSensorData()async{
   }
 }
 
-setRoomNames()async{
-  var result = await getRoomNames();
+setRoomList()async{
+  var result = await getRoomInformation();
   for (var row in result) {
-    rooms[0].add(row[0]);
-    rooms[0].add(row[1]);
-    rooms[0].add(row[2]);
+    roomList.add({
+      "name": row[0],
+      "picture": row[1],
+      "devices": row[2]
+    });
   }
 }
 
 setThemeMode(){
   if (valDarkMode == true){
     themeColor = Color(0xff091C27);
+    secondaryColor = themeColor;
     labelColor = Colors.white;
   }
   else{
     themeColor = Color(0xfff5f5f5);
-    labelColor = Colors.black;
+    secondaryColor = Color(0xFFbf360c);
+    labelColor = Colors.black54;
+  }
+}
+
+String getDeviceImage(row){
+  switch(row[1]){
+    case "socket":
+      break;
+    case "switch":
+      break;
+    case "blinder":
+      return "lib/assets/shutter.png";
+      break;
+    case "light":
+      return "lib/assets/lightbulb.png";
+      break;
+    case "fridge":
+      break;
+    case "sensor_weather":
+      break;
+    case "thermostat":
+      break;
+    case "fan":
+      break;
+    case "speaker":
+      break;
+  }
+}
+
+bool intToBool(int i){
+  if (i == 1){
+    return true;
+  }else{
+    return false;
+  }
+}
+
+int boolToInt(bool i){
+  if (i == true){
+    return 1;
+  }else{
+    return 0;
   }
 }

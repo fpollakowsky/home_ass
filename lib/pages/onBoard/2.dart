@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:flutter_villains/villain.dart';
-import 'package:home_ass/pages/onBoard/third.dart';
+import 'package:home_ass/pages/onBoard/3.dart';
 import 'package:home_ass/utils/res/colors.dart';
 import 'package:home_ass/utils/res/transitions.dart';
 import 'package:ping_discover_network/ping_discover_network.dart';
@@ -20,7 +20,7 @@ class OnBoardSecond extends StatefulWidget{
 class _OnBoardSecond extends State<OnBoardSecond> {
 
   startTimeout([int milliseconds]) {
-    Timer(Duration(seconds: 5), () {
+    Timer(Duration(seconds: 3), () {
       Navigator.of(context).push(FadeRouteBuilder(page: OnBoardThird()));
     });
   }

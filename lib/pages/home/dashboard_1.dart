@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_villains/villain.dart';
-import 'package:home_ass/pages/dashboard/deviceWidgets.dart';
+import 'package:home_ass/components/deviceWidgets.dart';
 import 'package:home_ass/pages/devices/devicesTab.dart';
 import 'package:home_ass/pages/settings/profile.dart';
 import 'package:home_ass/splashScreen.dart';
@@ -27,12 +27,12 @@ final List<String> listRoomImages = <String>[
 
 Curve animationCurve = Curves.ease;
 
-class DashboardIndex extends StatefulWidget{
+class Dashboard extends StatefulWidget{
   @override
-  _DashboardIndex createState() => _DashboardIndex();
+  _DashboardState createState() => _DashboardState();
 }
 
-class _DashboardIndex extends State<DashboardIndex> {
+class _DashboardState extends State<Dashboard> {
   @override
   Widget build(BuildContext context) {
     if(sensorData.length != 0){
@@ -98,75 +98,75 @@ class _DashboardIndex extends State<DashboardIndex> {
                   height: 140,
                   margin: EdgeInsets.only(top: 32),
                   child: ListView.builder(
-                      scrollDirection: Axis.horizontal,
-                      itemCount: listRoomNames.length,
-                      itemBuilder: (BuildContext context, int index){
-                        return Villain(
-                          villainAnimation: VillainAnimation.fromBottom(
-                            relativeOffset: 0.2,
-                            from: Duration(milliseconds: 300),
-                            to: Duration(milliseconds: 1000),
-                          ),
-                          animateExit: false,
-                          secondaryVillainAnimation: VillainAnimation.fade(),
-                          child: Hero(
-                              tag: listRoomNames[index],
-                              child: Container(
-                                  width: 132,
-                                  margin: EdgeInsets.only(right: 8),
-                                  child: Material(
-                                    color: primaryColor,
-                                    borderRadius: BorderRadius.all(Radius.circular(24)),
-                                    child: InkWell(
-                                        onTap: () => Navigator.of(context).push(FadeRouteBuilder(page: DevicesTab(roomName: listRoomNames[index]))),
-                                        borderRadius: BorderRadius.all(Radius.circular(24)),
-                                        child: Container(
-                                          padding: EdgeInsets.all(16),
-                                          child: Column(
-                                            crossAxisAlignment: CrossAxisAlignment.start,
+                    scrollDirection: Axis.horizontal,
+                    itemCount: listRoomNames.length,
+                    itemBuilder: (BuildContext context, int index){
+                      return Villain(
+                        villainAnimation: VillainAnimation.fromBottom(
+                          relativeOffset: 0.2,
+                          from: Duration(milliseconds: 300),
+                          to: Duration(milliseconds: 1000),
+                        ),
+                        animateExit: false,
+                        secondaryVillainAnimation: VillainAnimation.fade(),
+                        child: Hero(
+                          tag: listRoomNames[index],
+                          child: Container(
+                            width: 132,
+                            margin: EdgeInsets.only(right: 8),
+                            child: Material(
+                              color: primaryColor,
+                              borderRadius: BorderRadius.all(Radius.circular(24)),
+                              child: InkWell(
+                                  onTap: () => Navigator.of(context).push(FadeRouteBuilder(page: DevicesTab(roomName: listRoomNames[index]))),
+                                  borderRadius: BorderRadius.all(Radius.circular(24)),
+                                  child: Container(
+                                    padding: EdgeInsets.all(16),
+                                    child: Column(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: <Widget>[
+                                        Expanded(
+                                          child: Row(
+                                            mainAxisSize: MainAxisSize.max,
                                             children: <Widget>[
-                                              Expanded(
-                                                child: Row(
-                                                  mainAxisSize: MainAxisSize.max,
-                                                  children: <Widget>[
-                                                    Image(image: AssetImage(listRoomImages[index]), height: 32),
-                                                  ],
-                                                ),
-                                              ),
-                                              Divider(
-                                                color: Colors.white,
-                                              ),
-                                              Expanded(
-                                                  child: Column(
-                                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                                    children: <Widget>[
-                                                      Text(
-                                                        listRoomNames[index],
-                                                        style: TextStyle(
-                                                            color: Colors.white,
-                                                            fontWeight: FontWeight.bold,
-                                                            fontSize: 16
-                                                        ),
-                                                      ),
-                                                      Text(
-                                                        "1 Device",
-                                                        style: TextStyle(
-                                                            color: Colors.white,
-                                                            fontSize: 10
-                                                        ),
-                                                      )
-                                                    ],
-                                                  )
-                                              ),
+                                              Image(image: AssetImage(listRoomImages[index]), height: 32),
                                             ],
                                           ),
-                                        )
+                                        ),
+                                        Divider(
+                                          color: Colors.white,
+                                        ),
+                                        Expanded(
+                                            child: Column(
+                                              crossAxisAlignment: CrossAxisAlignment.start,
+                                              children: <Widget>[
+                                                Text(
+                                                  listRoomNames[index],
+                                                  style: TextStyle(
+                                                      color: Colors.white,
+                                                      fontWeight: FontWeight.bold,
+                                                      fontSize: 16
+                                                  ),
+                                                ),
+                                                Text(
+                                                  "1 Device",
+                                                  style: TextStyle(
+                                                      color: Colors.white,
+                                                      fontSize: 10
+                                                  ),
+                                                )
+                                              ],
+                                            )
+                                        ),
+                                      ],
                                     ),
                                   )
-                              )
-                          ),
-                        );
-                      }
+                              ),
+                            )
+                          )
+                        ),
+                      );
+                    }
                   ),
                 ),
                 Container(
@@ -219,7 +219,7 @@ class _DashboardIndex extends State<DashboardIndex> {
                                   Image(
                                     image: AssetImage("lib/assets/humidity.png"),
                                     height: 40,
-                                    color: Colors.white,
+                                    color: secondaryColor,
                                   ),
                                   Expanded(
                                       child: Text(

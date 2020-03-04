@@ -8,7 +8,6 @@ import 'package:home_ass/utils/res/styles.dart';
 import 'package:home_ass/utils/res/transitions.dart';
 
 // TODO Add profile picture to shared pref
-
 // ignore: must_be_immutable
 class ProfilePage extends StatefulWidget {
   @required
@@ -37,9 +36,8 @@ class _ProfilePage extends State<ProfilePage> {
                 tag: "profileImage",
                 child: Material(
                   borderRadius: BorderRadius.all(Radius.circular(16)),
-                  color: primaryColor,
+                  color: Colors.white,
                   child: InkWell(
-                    borderRadius: BorderRadius.all(Radius.circular(16)),
                     onTap: () {
                       setState(() {
                         widget.opacityVal = 0;
@@ -50,7 +48,8 @@ class _ProfilePage extends State<ProfilePage> {
                       height: 228,
                       width: 228,
                       decoration: BoxDecoration(
-                          borderRadius: BorderRadius.all(Radius.circular(16))
+                        borderRadius: BorderRadius.all(Radius.circular(16)),
+                        image: DecorationImage(image: AssetImage("images/male_profile.png"))
                       ),
                     ),
                   ),
@@ -72,7 +71,11 @@ class _ProfilePage extends State<ProfilePage> {
                       secondaryVillainAnimation: VillainAnimation.fade(),
                       child: Text(
                         valName,
-                        style: profileH1,
+                        style: TextStyle(
+                            color: labelColor,
+                            fontSize: 26,
+                            fontWeight: FontWeight.bold
+                        ),
                       ),
                     )
                 ),
@@ -94,7 +97,11 @@ class _ProfilePage extends State<ProfilePage> {
                       secondaryVillainAnimation: VillainAnimation.fade(),
                       child: Text(
                         "@" + valNick,
-                        style: profileH4,
+                        style: TextStyle(
+                            color: labelColor,
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold
+                        ),
                       ),
                     )
                 ),

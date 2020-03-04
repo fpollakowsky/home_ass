@@ -1,41 +1,54 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:home_ass/components/customScrollBehavior.dart';
 import 'package:home_ass/pages/home/dashboard.dart';
 import 'package:home_ass/pages/home/routines.dart';
-import 'package:home_ass/pages/home/settings.dart';
 import 'package:home_ass/utils/res/colors.dart';
 
-class HomeScreen extends StatefulWidget {
-  @required
-  final int index;
+void main() => runApp(TabBar());
 
-  HomeScreen({
-    this.index
-  });
-
+class TabBar extends StatelessWidget {
   @override
-  _HomeScreenState createState() => _HomeScreenState();
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      title: 'eHome Concepts Design Test',
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+      ),
+      builder: (context, child) {
+        return ScrollConfiguration(
+          behavior: CustomScrollBehavior(),
+          child: child,
+        );
+      },
+      home: MyTabBar(),
+    );
+  }
 }
 
-class _HomeScreenState extends State<HomeScreen>
-    with SingleTickerProviderStateMixin {
+class MyTabBar extends StatefulWidget {
+  @override
+  _MyTabBarState createState() => _MyTabBarState();
+}
+
+class _MyTabBarState extends State<MyTabBar>
+  with SingleTickerProviderStateMixin {
   TabController _tabController;
   int _selectedIndex = 0;
   static ScrollController _scrollViewController;
   List<Widget> _widgetOptions = <Widget>[
     Dashboard2(),
     Routines(),
-    Settings()
+    Dashboard2()
   ];
 
   @override
   void initState() {
-    super.initState();
-    _selectedIndex = widget.index;
-    _tabController = TabController(vsync: this, length: 2);
-    _scrollViewController = ScrollController(initialScrollOffset: 0.0);
+  super.initState();
+  _selectedIndex = 1;
+  _tabController = TabController(vsync: this, length: 2);
+  _scrollViewController = ScrollController(initialScrollOffset: 0.0);
   }
-
   @override
   void dispose() {
     _tabController.dispose();
@@ -52,8 +65,13 @@ class _HomeScreenState extends State<HomeScreen>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: secondaryColor,
+        backgroundColor: primaryColor,
         bottomNavigationBar: BottomNavigationBar(
+          backgroundColor: primaryColor,
+          currentIndex: _selectedIndex,
+          selectedItemColor: secondaryColor,
+          unselectedItemColor: Colors.white,
+          onTap: _onItemTapped,
           items: const <BottomNavigationBarItem>[
             BottomNavigationBarItem(
               icon: Icon(Icons.home),
@@ -68,9 +86,6 @@ class _HomeScreenState extends State<HomeScreen>
               title: Text('Settings'),
             ),
           ],
-          currentIndex: _selectedIndex,
-          selectedItemColor: primaryColor,
-          onTap: _onItemTapped,
         ),
         body: SafeArea(
           child: _widgetOptions.elementAt(_selectedIndex),

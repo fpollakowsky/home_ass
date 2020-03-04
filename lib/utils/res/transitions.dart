@@ -20,39 +20,12 @@ class FadeRouteBuilder<T> extends PageRouteBuilder<T> {
   );
 }
 
-class SlideRightRoute extends PageRouteBuilder {
-  final Widget page;
-  SlideRightRoute({this.page})
-      : super(
-    pageBuilder: (
-        BuildContext context,
-        Animation<double> animation,
-        Animation<double> secondaryAnimation,
-        ) =>
-    page,
-    transitionDuration: Duration(seconds: 1),
-    transitionsBuilder: (
-        BuildContext context,
-        Animation<double> animation,
-        Animation<double> secondaryAnimation,
-        Widget child,
-        ) =>
-        SlideTransition(
-          position: Tween<Offset>(
-            begin: const Offset(1, 1),
-            end: Offset.zero,
-          ).animate(animation),
-          child: child,
-        ),
-  );
-}
-
-class SlideRouteBuilder extends PageRouteBuilder {
+class SlideRouteFromLeft extends PageRouteBuilder {
   final Widget page;
   final double offsetX;
   final double offsetY;
 
-  SlideRouteBuilder({
+  SlideRouteFromLeft({
     @required
     this.page,
     this.offsetX = -1,
@@ -70,6 +43,31 @@ class SlideRouteBuilder extends PageRouteBuilder {
       }
   );
 }
+
+class SlideRouteFromRight extends PageRouteBuilder {
+  final Widget page;
+  final double offsetX;
+  final double offsetY;
+
+  SlideRouteFromRight({
+    @required
+    this.page,
+    this.offsetX = 1,
+    this.offsetY = 0
+  }) : super(
+      pageBuilder: (BuildContext context, Animation<double> animation, Animation<double> secondaryAnimation) => page,
+      transitionsBuilder: (BuildContext context, Animation<double> animation, Animation<double> secondaryAnimation, Widget child) {
+        return new SlideTransition(
+          position: new Tween<Offset>(
+            begin: Offset(offsetX , offsetY),
+            end: Offset.zero,
+          ).animate(animation),
+          child: child,
+        );
+      }
+  );
+}
+
 
 setAnimationTime(){
   milliStart = milliStart + 150;

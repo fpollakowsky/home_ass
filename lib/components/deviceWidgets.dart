@@ -1,9 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_villains/villain.dart';
-import 'package:home_ass/pages/dashboard/dashboard.dart';
-import 'package:home_ass/utils/mysql/getRequests.dart';
-import 'package:home_ass/utils/mysql/setRequest.dart';
+import 'package:home_ass/pages/home/dashboard_1.dart';
+import 'package:home_ass/utils/mysql/updateRequest.dart';
 import 'package:home_ass/utils/res/colors.dart';
 import 'package:home_ass/utils/res/global.dart';
 import 'package:home_ass/utils/res/styles.dart';
@@ -87,16 +86,16 @@ class CreateDeviceWidgets extends StatelessWidget{
 
 switchButtonOnChanged(int index, bool state, bool isRight){
   if (isRight == false && state == true){
-    setDeviceValue(true, allDevices[0][index]);
+    updateDeviceInformation("val", true, allDevices[0][index]);
   }
   else if(isRight == false && state == false){
-    setDeviceValue(false, allDevices[0][index]);
+    updateDeviceInformation("val", false, allDevices[0][index]);
   }
   else if (isRight == true && state == true){
-    setDeviceValue(true, allDevices[0][index]);
+    updateDeviceInformation("val", true, allDevices[0][index]);
   }
   else if (isRight == true && state == false){
-    setDeviceValue(false, allDevices[0][index]);
+    updateDeviceInformation("val", false, allDevices[0][index]);
   }
 }
 
