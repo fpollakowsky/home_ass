@@ -6,7 +6,6 @@ import 'package:flutter/services.dart';
 import 'package:flutter_villains/villain.dart';
 import 'package:home_ass/utils/res/colors.dart';
 import 'package:home_ass/utils/res/global.dart';
-import 'package:vibration/vibration.dart';
 
 String txtGateway;
 
@@ -18,6 +17,7 @@ class _OnBoardThird extends State<OnBoardThird> {
   startTimeout([int milliseconds]) {
     Timer(Duration(seconds: 3), () {
       initDashboard(context, true);
+      //Navigator.of(context).push(FadeRouteBuilder(page: OnBoardFourth()));
     });
   }
 
@@ -26,17 +26,10 @@ class _OnBoardThird extends State<OnBoardThird> {
     super.initState();
   }
 
-  vibrate()async{
-    if (await Vibration.hasVibrator()) {
-      Vibration.vibrate(duration: 1000);
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     SystemChrome.setEnabledSystemUIOverlays([]);
     if(gatewayIPs.length != 0){
-      vibrate();
       if (gatewayIPs.length > 1){
         txtGateway = "Gateways found";
       }
@@ -69,9 +62,9 @@ class GatewayFound extends StatelessWidget{
                       alignment: Alignment.center,
                       child: Villain(
                         villainAnimation: VillainAnimation.fromBottom(
-                            relativeOffset: 0.4,
-                            from: Duration(milliseconds: 800),
-                            to: Duration(milliseconds: 1300)
+                          relativeOffset: 0.4,
+                          from: Duration(milliseconds: 800),
+                          to: Duration(milliseconds: 1300)
                         ),
                         secondaryVillainAnimation: VillainAnimation.fade(),
                         child: Text(

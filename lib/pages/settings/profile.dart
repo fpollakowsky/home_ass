@@ -7,7 +7,6 @@ import 'package:home_ass/utils/res/global.dart';
 import 'package:home_ass/utils/res/styles.dart';
 import 'package:home_ass/utils/res/transitions.dart';
 
-// TODO Add profile picture to shared pref
 // ignore: must_be_immutable
 class ProfilePage extends StatefulWidget {
   @required
@@ -49,7 +48,7 @@ class _ProfilePage extends State<ProfilePage> {
                       width: 228,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.all(Radius.circular(16)),
-                        image: DecorationImage(image: AssetImage("images/male_profile.png"))
+                        image: DecorationImage(image: AssetImage(valProfile))
                       ),
                     ),
                   ),

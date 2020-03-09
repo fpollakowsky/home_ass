@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_villains/villain.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:home_ass/pages/onBoard/1.dart';
+import 'package:home_ass/pages/onBoard/onBoardFirst.dart';
 import 'package:home_ass/utils/res/colors.dart';
 import 'package:home_ass/utils/res/global.dart';
 
@@ -33,7 +33,9 @@ class _SplashScreen extends State<SplashScreen> {
         Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => OnBoardFirst()));
       }
       else{
-        initDashboard(context, true);
+        loadSharedPreferences().then((val){
+          initDashboard(context, true);
+        });
       }
     });
   }

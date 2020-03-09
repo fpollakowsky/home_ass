@@ -13,14 +13,14 @@ import 'package:home_ass/utils/res/global.dart';
 
 Timer timer;
 
-class OnBoardSecond extends StatefulWidget{
-  _OnBoardSecond createState() => _OnBoardSecond();
+class OnBoardSearchGateway extends StatefulWidget{
+  _OnBoardSearchGateway createState() => _OnBoardSearchGateway();
 }
 
-class _OnBoardSecond extends State<OnBoardSecond> {
+class _OnBoardSearchGateway extends State<OnBoardSearchGateway> {
 
   startTimeout([int milliseconds]) {
-    Timer(Duration(seconds: 3), () {
+    Timer(Duration(seconds: 5), () {
       Navigator.of(context).push(FadeRouteBuilder(page: OnBoardThird()));
     });
   }
@@ -84,7 +84,7 @@ class _OnBoardSecond extends State<OnBoardSecond> {
                       mainAxisSize: MainAxisSize.max,
                       children: <Widget>[
                         Hero(
-                          tag: "logo",
+                          tag: heroTagOnBoard,
                           child: Container(
                             height: 64,
                             width:  64,
@@ -92,7 +92,7 @@ class _OnBoardSecond extends State<OnBoardSecond> {
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadius.all(Radius.circular(8.0)),
                                 image: DecorationImage(
-                                    image: NetworkImage("https://via.placeholder.com/256"),
+                                    image: AssetImage(valProfile),
                                     fit: BoxFit.cover
                                 )
                             ),
@@ -100,22 +100,23 @@ class _OnBoardSecond extends State<OnBoardSecond> {
                         ),
                         Expanded(
                           child: Container(
-                              alignment: Alignment.center,
-                              child: Hero(
-                                  tag: "txtLogo",
-                                  child: Material(
-                                      color: Colors.transparent,
-                                      child: Text(
-                                          "Placeholder",
-                                          style: TextStyle(
-                                              fontSize: 28,
-                                              fontWeight:
-                                              FontWeight.bold,
-                                              color: Colors.white
-                                          )
-                                      )
-                                  )
-                              )
+                            margin: EdgeInsets.symmetric(horizontal: 16),
+                            alignment: Alignment.center,
+                            child: Hero(
+                                tag: "txtLogo",
+                                child: Material(
+                                    color: Colors.transparent,
+                                    child: Text(
+                                        "Welcome " + valName + "!",
+                                        style: TextStyle(
+                                            fontSize: 28,
+                                            fontWeight:
+                                            FontWeight.bold,
+                                            color: Colors.white
+                                        )
+                                    )
+                                )
+                            )
                           ),
                         ),
                         Container(
@@ -142,26 +143,26 @@ class _OnBoardSecond extends State<OnBoardSecond> {
                     ),
                     Villain(
                       villainAnimation: VillainAnimation.fromBottom(
-                          relativeOffset: 0.3,
-                          from: Duration(milliseconds: 800),
-                          to: Duration(milliseconds: 1300)
+                        relativeOffset: 0.3,
+                        from: Duration(milliseconds: 800),
+                        to: Duration(milliseconds: 1300)
                       ),
                       secondaryVillainAnimation: VillainAnimation.fade(),
                       child: Container(
-                          padding: EdgeInsets.all(8),
-                          alignment: Alignment.bottomCenter,
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.all(Radius.circular(16))
-                          ),
-                          child: Text(
-                              "Searching for devices",
-                              style: TextStyle(
-                                  fontSize: 16,
-                                  fontWeight:
-                                  FontWeight.bold,
-                                  color: Colors.white
-                              )
+                        padding: EdgeInsets.all(8),
+                        alignment: Alignment.bottomCenter,
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.all(Radius.circular(16))
+                        ),
+                        child: Text(
+                          "Searching for devices",
+                          style: TextStyle(
+                            fontSize: 16,
+                            fontWeight:
+                            FontWeight.bold,
+                            color: Colors.white
                           )
+                        )
                       ),
                     )
                   ],

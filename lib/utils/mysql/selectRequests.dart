@@ -3,7 +3,7 @@ import 'package:home_ass/utils/time.dart';
 
 Future<dynamic> getDeviceInformation()async{
   var conn = await getConnection();
-  return await conn.query('SELECT id,type,thing_name,val,isFavouriteBy FROM devices ORDER BY isFavouriteBy DESC');
+  return await conn.query('SELECT id,type,thing_name,val,isFavouriteBy,room FROM devices ORDER BY isFavouriteBy DESC');
 }
 
 Future<dynamic> getRoomInformation()async{
@@ -13,7 +13,7 @@ Future<dynamic> getRoomInformation()async{
 
 Future<dynamic> getRoutinesInformation()async{
   var conn = await getConnection();
-  return await conn.query("SELECT title,weekdays,DATE_FORMAT(time, '%H:%i'),id,isActive Time FROM routines");
+  return await conn.query("SELECT title,weekdays,DATE_FORMAT(startTime, '%H:%i'),DATE_FORMAT(endTime, '%H:%i'),id,isActive Time FROM routines");
 }
 
 Future<dynamic> getSensorData()async{

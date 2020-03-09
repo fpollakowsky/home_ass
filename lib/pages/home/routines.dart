@@ -4,6 +4,8 @@ import 'package:home_ass/components/singleRoutine.dart';
 import 'package:home_ass/pages/home/dashboard_1.dart';
 import 'package:home_ass/utils/res/colors.dart';
 import 'package:home_ass/utils/res/global.dart';
+import 'package:flutter_page_transition/flutter_page_transition.dart';
+import 'package:home_ass/pages/add/addRoutine.dart';
 
 class Routines extends StatefulWidget {
   @override
@@ -12,6 +14,7 @@ class Routines extends StatefulWidget {
 
 class _RoutinesState extends State<Routines>
     with SingleTickerProviderStateMixin {
+  TabController _tabControllerRoutine;
 
   @override
   void initState() {
@@ -71,6 +74,7 @@ class _RoutinesState extends State<Routines>
                               children: <Widget>[
                                 Expanded(
                                   child: TabBar(
+                                    controller: _tabControllerRoutine,
                                     isScrollable: true,
                                     indicatorColor: Colors.transparent,
                                     tabs: choices.map((SingleRoutine choice) {
@@ -82,16 +86,15 @@ class _RoutinesState extends State<Routines>
                                 ),
                                 Container(
                                   decoration: BoxDecoration(
-
-                                      borderRadius: BorderRadius.all(Radius.circular(100))
+                                    borderRadius: BorderRadius.all(Radius.circular(100))
                                   ),
                                   child: IconButton(
                                     icon: Icon(
-                                        Icons.add,
-                                        color: Colors.white
+                                      Icons.add,
+                                      color: Colors.white
                                     ),
                                     onPressed: (){
-
+                                      Navigator.of(context).push(PageTransition(type: PageTransitionType.transferRight, child: AddRoutine(), duration: Duration(milliseconds: 400)));
                                     },
                                   ),
                                 )

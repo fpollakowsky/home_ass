@@ -7,21 +7,9 @@ import 'package:home_ass/utils/mysql/selectRequests.dart';
 import 'package:home_ass/utils/mysql/initMySQL.dart';
 import 'package:home_ass/utils/res/colors.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'dart:convert';
 
-
-bool valFirstStart;
-bool valNotification;
-bool valDarkMode;
-bool valFingerprint;
-
-String valAbode;
-String valName;
-String valNick;
-String valLanguage;
-String valIP;
-String valPrivacy;
-
+bool valFirstStart,valNotification,valDarkMode,valFingerprint;
+String valAbode,valName,valNick,valLanguage,valIP,valPrivacy,valProfile,heroTagOnBoard;
 List<String> gatewayIPs = [];
 List<dynamic> sensorData = []; // Pressure | Temp | Hum
 List<List<dynamic>> allDevices = [
@@ -35,15 +23,14 @@ List<List<dynamic>> allDevices = [
 var allDevices2 = [];
 var roomList = [];
 var routineList = [];
+var addRoutineDevice = [];
 
 initFirstSetup(){
   setValueSharedPref("notification", false,"bool");
-  setValueSharedPref("darkmode", true,"bool");
+  setValueSharedPref("darkmode", false,"bool");
   setValueSharedPref("fingerprint", false,"bool");
 
   setValueSharedPref("abode","Living Room","string");
-  setValueSharedPref("name","Unknown","string");
-  setValueSharedPref("nickname","Unknown","string");
   setValueSharedPref("language","English","string");
   setValueSharedPref("privacy","Advanced","string");
 }
@@ -73,7 +60,7 @@ initDashboard(context, bool isStartup){
 }
 
 // KEYS
-// //firstStart | notification | darkmode | fingerprint | abode | language | name | nickname | password | ip | privacy
+// firstStart | notification | darkmode | fingerprint | abode | language | name | nickname | ip | privacy
 setValueSharedPref(key, value, type)async{
   SharedPreferences sharedPref = await SharedPreferences.getInstance();
 
@@ -95,6 +82,10 @@ getSettings(key, type)async{
   }
 }
 
+loadProfilePicture()async{
+  valProfile = await getSettings("profilePicture", "string");
+}
+
 loadSharedPreferences()async{
   valFirstStart = await getSettings("firstStart", "bool");
   valNotification = await getSettings("notification", "bool");
@@ -107,6 +98,7 @@ loadSharedPreferences()async{
   valLanguage = await getSettings("language", "string");
   valPrivacy = await getSettings("privacy", "string");
   valIP = await getSettings("ip", "string");
+  valProfile = await getSettings("profilePicture", "string");
 }
 
 setDeviceInformation()async{
@@ -121,6 +113,7 @@ setDeviceInformation()async{
         "Name": row[2],
         "Value": row[3],
         "isFavouriteBy": row[4],
+        "Room": row[5],
         "Image": getDeviceImage(row)
       });
       allDevices[0].add(row[0]);
@@ -141,9 +134,10 @@ setRoutinesInformation()async{
       routineList.add({
         "Title": row[0].toString(),
         "Weekdays": json.decode(row[1].toString()),
-        "Time": row[2],
-        "ID": row[3],
-        "isActive": row[4]
+        "Start": row[2],
+        "End": row[3],
+        "ID": row[4],
+        "isActive": row[5],
       });
     }
   }
@@ -185,6 +179,10 @@ setThemeMode(){
     secondaryColor = Color(0xFFbf360c);
     labelColor = Colors.black54;
   }
+}
+
+setHeroTagOnBoard(String val){
+  heroTagOnBoard = val;
 }
 
 String getDeviceImage(row){

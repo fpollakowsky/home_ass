@@ -45,20 +45,24 @@ class _SettingsIndex extends State<Settings>
                 ),
                 child: Row(
                   children: <Widget>[
-                    InkWell(
+                    Hero(
+                      tag: "profileImage",
+                      child: Material(
                         borderRadius: BorderRadius.all(Radius.circular(16)),
-                        onTap: () => Navigator.of(context).push(FadeRouteBuilder(page: ProfilePage(opacityVal: 1,))),
-                        child: Hero(
-                          tag: "profileImage",
+                        color: Colors.white,
+                        child: InkWell(
+                          borderRadius: BorderRadius.all(Radius.circular(16)),
+                          onTap: () => Navigator.of(context).push(FadeRouteBuilder(page: ProfilePage(opacityVal: 1,))),
                           child: Container(
                             height: 72,
                             width: 72,
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.all(Radius.circular(16)),
-                              image: DecorationImage(image: AssetImage("images/male_profile.png")),
+                              image: DecorationImage(image: AssetImage(valProfile)),
                             )
                           ),
-                        )
+                        ),
+                      )
                     ),
                     Expanded(
                         child: Container(

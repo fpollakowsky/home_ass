@@ -1,8 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-Color themeColor = Color(0xff091C27);
 Color labelColor;
+Color unselectedBoxColor = Color(0xffEFEFF4);
+Color unselectedTextColor = Color(0xff848A9C);
+
+Color themeColor = Color(0xff091C27);
 const Color primaryColor = Color(0xffbf360c);
 Color secondaryColor = Color(0xFFbf360c);
 const Color primaryLightColor = Color(0xfff9683a);
