@@ -1,21 +1,46 @@
 import 'package:home_ass/utils/res/global.dart';
 import 'package:mysql1/mysql1.dart';
 
-var connSettings = ConnectionSettings(
-    //host: "85.214.233.67",
-    host: valIP,
-    port: 3306,
-    user: "ehc_test",
-    password: "rh2O@4a9",
-    db: "ehc_test"
-);
+Future<dynamic>getMySQLConnection([int database])async{
+  var connSettings;
+  int databasePort = 3306;
+  String databaseSensor = "data";
+  String databaseGeneral = "ehome-concepts";
+  String databaseUser = "fpollakowsky";       // ehome-concepts
+  String databasePassword = "2maL5UbXeUhG";   // rh2O@4a9
 
-Future<dynamic>getConnection()async{
+  /// DEBUG
+  if (DEBUG == null){
+    //valIP = "85.214.233.67";
+    databaseSensor = "data";
+    databaseGeneral = "ehome-concepts";
+  }
+  /// END
+
+  if(database == 1){
+    connSettings = ConnectionSettings(
+        host: valIP,
+        port: databasePort,
+        user: databaseUser,
+        password: databasePassword,
+        db: databaseSensor
+    );
+  }else{
+    connSettings = ConnectionSettings(
+        host: valIP,
+        port: databasePort,
+        user: databaseUser,
+        password: databasePassword,
+        db: databaseGeneral
+    );
+  }
+
   try{
     var conn = await MySqlConnection.connect(connSettings).timeout(Duration(seconds: 5));
     return conn;
   }
   catch(e){
-    return "err";
+    DEBUG ?? print("MYSQL:: Connection failure! \n$e");
+    return "101";
   }
 }

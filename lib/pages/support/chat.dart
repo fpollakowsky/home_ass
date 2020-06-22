@@ -36,8 +36,6 @@ class ChatScreenState extends State<ChatScreen> {
   void initState() {
     super.initState();
     chatID = '';
-    isLoading = false;
-
     setChatID();
   }
 
@@ -79,17 +77,6 @@ class ChatScreenState extends State<ChatScreen> {
     Navigator.pop(context);
 
     return Future.value(false);
-  }
-  Widget buildLoading() {
-    return Positioned(
-      child: isLoading ? Container(
-        child: Center(
-          child: CircularProgressIndicator(valueColor: AlwaysStoppedAnimation<Color>(themeColor)),
-        ),
-        color: Colors.white.withOpacity(0.8),
-      )
-          : Container(),
-    );
   }
   Widget buildTextInput() {
     return Row(
@@ -164,7 +151,6 @@ class ChatScreenState extends State<ChatScreen> {
                           buildListMessage(),
                         ],
                       ),
-                      buildLoading()
                     ],
                   ),
                 ),

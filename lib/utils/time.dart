@@ -1,6 +1,7 @@
 import 'package:intl/intl.dart';
 
 String getTimeNowQuery(){
+  // TODO ERROR WHEN TIME IS 00:00 - 01:05 because of wrong date
   var date = DateFormat('yyyy-MM-dd');
   var timeH = DateFormat('HH');
   var timeM = DateFormat('mm');
@@ -9,20 +10,12 @@ String getTimeNowQuery(){
   int formattedH = int.parse(timeH.format(DateTime.now()));
   int formattedM = int.parse(timeM.format(DateTime.now()));
 
-  if (formattedM < 5){
-    formattedH = formattedH - 1;
-    formattedM = 55;
-  }
-  else{
-    formattedM = formattedM - 5;
-  }
-
-  if (formattedM < 10){
-    datetime = formattedYear + " " + formattedH.toString() + ":0" + formattedM.toString();
-  }
-  else{
+  formattedM < 5 ? formattedM = 55 : formattedM = formattedM - 5;
+  formattedH < 1 ? formattedH = 23 : formattedH = formattedH - 1;
+  formattedM < 10 ?
+    datetime = formattedYear + " " + formattedH.toString() + ":0" + formattedM.toString() :
     datetime = formattedYear + " " + formattedH.toString() + ":" + formattedM.toString();
-  }
+
   return datetime;
 }
 splitTimestamp(timestamp){

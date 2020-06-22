@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:home_ass/components/singleRoutine.dart';
+import 'package:home_ass/pages/add/addRoutineFirst.dart';
 import 'package:home_ass/pages/home/dashboard_1.dart';
 import 'package:home_ass/utils/res/colors.dart';
 import 'package:home_ass/utils/res/global.dart';
@@ -38,84 +39,82 @@ class _RoutinesState extends State<Routines>
             color: themeColor,
             child: DefaultTabController(
               length: choices.length,
-              child: SafeArea(
-                child: Column(
-                  children: <Widget>[
-                    Container(
-                      padding: EdgeInsets.only(top: 8,left: 8, right: 8),
-                      color: secondaryColor,
-                      child: Column(
-                        children: <Widget>[
-                          Row(
+              child: Column(
+                children: <Widget>[
+                  Container(
+                    padding: EdgeInsets.only(top: 8,left: 8, right: 8),
+                    color: secondaryColor,
+                    child: Column(
+                      children: <Widget>[
+                        Row(
+                          children: <Widget>[
+                            Expanded(
+                              child: Text(
+                                "Routines",
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 32,
+                                    letterSpacing: 2
+                                ),
+                              ),
+                            ),
+                            Container(
+                              height: 48,
+                              width: 48,
+                              decoration: BoxDecoration(
+                                  image: DecorationImage(image: AssetImage("lib/assets/images/male_profile.png"))
+                              ),
+                            )
+                          ],
+                        ),
+                        Container(
+                          margin: EdgeInsets.symmetric(vertical: 8),
+                          child: Row(
                             children: <Widget>[
                               Expanded(
-                                child: Text(
-                                  "Routines",
-                                  style: TextStyle(
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 32,
-                                      letterSpacing: 2
-                                  ),
+                                child: TabBar(
+                                  controller: _tabControllerRoutine,
+                                  isScrollable: true,
+                                  indicatorColor: Colors.transparent,
+                                  tabs: choices.map((SingleRoutine choice) {
+                                    return Tab(
+                                      text: choice.title,
+                                    );
+                                  }).toList(),
                                 ),
                               ),
                               Container(
-                                height: 48,
-                                width: 48,
                                 decoration: BoxDecoration(
-                                    image: DecorationImage(image: AssetImage("images/male_profile.png"))
+                                    borderRadius: BorderRadius.all(Radius.circular(100))
+                                ),
+                                child: IconButton(
+                                  icon: Icon(
+                                      Icons.add,
+                                      color: Colors.white
+                                  ),
+                                  onPressed: (){
+                                    Navigator.of(context).push(PageTransition(type: PageTransitionType.fadeIn, child: AddRoutineFirst(), duration: Duration(milliseconds: 400)));
+                                  },
                                 ),
                               )
                             ],
                           ),
-                          Container(
-                            margin: EdgeInsets.symmetric(vertical: 8),
-                            child: Row(
-                              children: <Widget>[
-                                Expanded(
-                                  child: TabBar(
-                                    controller: _tabControllerRoutine,
-                                    isScrollable: true,
-                                    indicatorColor: Colors.transparent,
-                                    tabs: choices.map((SingleRoutine choice) {
-                                      return Tab(
-                                        text: choice.title,
-                                      );
-                                    }).toList(),
-                                  ),
-                                ),
-                                Container(
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.all(Radius.circular(100))
-                                  ),
-                                  child: IconButton(
-                                    icon: Icon(
-                                      Icons.add,
-                                      color: Colors.white
-                                    ),
-                                    onPressed: (){
-                                      Navigator.of(context).push(PageTransition(type: PageTransitionType.transferRight, child: AddRoutine(), duration: Duration(milliseconds: 400)));
-                                    },
-                                  ),
-                                )
-                              ],
-                            ),
-                          )
-                        ],
-                      ),
+                        )
+                      ],
                     ),
-                    Expanded(
-                      child: TabBarView(
-                        children: choices.map((SingleRoutine choice) {
-                          return Container(
-                            padding: EdgeInsets.only(top: 8),
-                            child: SingleRoutine(title: choice.title),
-                          );
-                        }).toList(),
-                      ),
+                  ),
+                  Expanded(
+                    child: TabBarView(
+                      children: choices.map((SingleRoutine choice) {
+                        return Container(
+                          padding: EdgeInsets.only(top: 8),
+                          child: SingleRoutine(title: choice.title),
+                        );
+                      }).toList(),
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
             ),
           ),

@@ -2,16 +2,22 @@ import 'dart:convert';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:home_ass/pages/error/101.dart';
 import 'package:home_ass/pages/home.dart';
 import 'package:home_ass/utils/mysql/selectRequests.dart';
 import 'package:home_ass/utils/mysql/initMySQL.dart';
 import 'package:home_ass/utils/res/colors.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+/// DO NOT CHANGE
+/// FOR DEBUGGING PURPOSE ONLY
+bool DEBUG;
+/// End
+
 bool valFirstStart,valNotification,valDarkMode,valFingerprint;
 String valAbode,valName,valNick,valLanguage,valIP,valPrivacy,valProfile,heroTagOnBoard;
 List<String> gatewayIPs = [];
-List<dynamic> sensorData = []; // Pressure | Temp | Hum
+List<dynamic> sensorData = [[],[],[]]; // Pressure | Temp | Hum
 List<List<dynamic>> allDevices = [
   [], // ID
   [], // isFavouriteBy
@@ -26,6 +32,7 @@ var routineList = [];
 var addRoutineDevice = [];
 
 initFirstSetup(){
+  setValueSharedPref("firstStart", false,"bool");
   setValueSharedPref("notification", false,"bool");
   setValueSharedPref("darkmode", false,"bool");
   setValueSharedPref("fingerprint", false,"bool");
@@ -36,15 +43,17 @@ initFirstSetup(){
 }
 
 initDashboard(context, bool isStartup){
-  getConnection().then((val){
-    if (val != "err"){
+  DEBUG ?? print("INFO:: START LAUNCH PROCESS");
+  getMySQLConnection().then((val){
+    if (val != "101"){
       setSensorData().then((val){
         setDeviceInformation().then((val){
           setRoomList().then((val){
             setThemeMode();
             setRoutinesInformation().then((val){
               if (isStartup == true){
-                Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => HomeScreen(index: 0,)));
+                DEBUG ?? print("INFO:: LAUNCH FINISHED WITHOUT ERRORS");
+                Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => HomeScreen(index: 1,)));
               }
             });
           });
@@ -53,7 +62,10 @@ initDashboard(context, bool isStartup){
     }
     else{
       if (isStartup == true){
-        Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => HomeScreen(index: 0,)));
+        // Connection Error
+        setNoConnectionVariables();
+        Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => HomeScreen(index: 1, error: 101,)));
+        DEBUG ?? print("INFO:: LAUNCH FINISHED WITHOUT MYSQL CONNECTION");
       }
     }
   });
@@ -62,6 +74,7 @@ initDashboard(context, bool isStartup){
 // KEYS
 // firstStart | notification | darkmode | fingerprint | abode | language | name | nickname | ip | privacy
 setValueSharedPref(key, value, type)async{
+  DEBUG ?? print("INFO:: save value to shared preference");
   SharedPreferences sharedPref = await SharedPreferences.getInstance();
 
   if (type == "string"){
@@ -83,10 +96,12 @@ getSettings(key, type)async{
 }
 
 loadProfilePicture()async{
+  DEBUG ?? print("INFO:: load profile picture");
   valProfile = await getSettings("profilePicture", "string");
 }
 
 loadSharedPreferences()async{
+  DEBUG ?? print("INFO:: load shared preferences");
   valFirstStart = await getSettings("firstStart", "bool");
   valNotification = await getSettings("notification", "bool");
   valDarkMode = await getSettings("darkmode", "bool");
@@ -102,6 +117,8 @@ loadSharedPreferences()async{
 }
 
 setDeviceInformation()async{
+  DEBUG ?? print("INFO:: setting device information");
+
   var result = await getDeviceInformation();
   allDevices2.removeRange(0, allDevices2.length);
 
@@ -114,7 +131,8 @@ setDeviceInformation()async{
         "Value": row[3],
         "isFavouriteBy": row[4],
         "Room": row[5],
-        "Image": getDeviceImage(row)
+        "Image": getDeviceImage(row),
+        "Channel": row[6]
       });
       allDevices[0].add(row[0]);
       allDevices[2].add(row[1]);
@@ -126,6 +144,7 @@ setDeviceInformation()async{
 }
 
 setRoutinesInformation()async{
+  DEBUG ?? print("INFO:: setting routines information");
   var result = await getRoutinesInformation();
   routineList.removeRange(0, routineList.length);
 
@@ -144,6 +163,7 @@ setRoutinesInformation()async{
 }
 
 setSensorData()async{
+  DEBUG ?? print("INFO:: setting sensor data");
   var result = await getSensorData();
   sensorData.removeRange(0, sensorData.length);
 
@@ -158,6 +178,7 @@ setSensorData()async{
 }
 
 setRoomList()async{
+  DEBUG ?? print("INFO:: setting room list");
   var result = await getRoomInformation();
   for (var row in result) {
     roomList.add({
@@ -169,14 +190,15 @@ setRoomList()async{
 }
 
 setThemeMode(){
+  DEBUG ?? print("INFO:: setting theme mode");
   if (valDarkMode == true){
     themeColor = Color(0xff091C27);
-    secondaryColor = themeColor;
+    //secondaryColor = themeColor;
     labelColor = Colors.white;
   }
   else{
     themeColor = Color(0xfff5f5f5);
-    secondaryColor = Color(0xFFbf360c);
+    //secondaryColor = Color(0xFFbf360c);
     labelColor = Colors.black54;
   }
 }
@@ -185,17 +207,26 @@ setHeroTagOnBoard(String val){
   heroTagOnBoard = val;
 }
 
+setNoConnectionVariables(){
+  DEBUG ?? print("INFO:: setting failed connection variables");
+  sensorData[0] = 0;
+  sensorData[1] = 0;
+  sensorData[2] = 0;
+}
+
 String getDeviceImage(row){
+  // TODO add pictures
   switch(row[1]){
     case "socket":
       break;
     case "switch":
+      return "lib/assets/images/shutter.png";
       break;
     case "blinder":
-      return "lib/assets/shutter.png";
+      return "lib/assets/images/shutter.png";
       break;
     case "light":
-      return "lib/assets/lightbulb.png";
+      return "lib/assets/images/lightbulb.png";
       break;
     case "fridge":
       break;

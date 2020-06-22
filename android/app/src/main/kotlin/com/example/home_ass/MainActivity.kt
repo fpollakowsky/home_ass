@@ -1,4 +1,4 @@
-package com.example.home_ass
+package de.nethcon.home_ass
 
 import androidx.annotation.NonNull;
 import io.flutter.embedding.android.FlutterActivity

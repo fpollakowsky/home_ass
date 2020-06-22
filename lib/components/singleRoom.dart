@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:home_ass/pages/devices/devicesTab.dart';
+import 'package:home_ass/pages/devices/DevicePage.dart';
 import 'package:home_ass/utils/res/colors.dart';
 import 'package:home_ass/utils/res/transitions.dart';
 import 'package:home_ass/utils/res/global.dart';

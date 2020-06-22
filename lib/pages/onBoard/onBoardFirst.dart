@@ -41,7 +41,7 @@ class _OnBoardFirst extends State<OnBoardFirst> {
                   height: 256,
                   width:  256,
                   alignment: Alignment.topLeft,
-                  child: Image(image: AssetImage("images/favicon.png"),color: Colors.white,),
+                  child: Image(image: AssetImage("lib/assets/images/favicon.png"),color: Colors.white,),
                 ),
               ),
               Container(

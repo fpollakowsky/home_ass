@@ -198,14 +198,17 @@ class _CustomSwitchHorizontal extends State<CustomSwitchHorizontal>
   }
 
   _determine({bool changeState = false}) {
-    setState(() {
-      if (changeState) turnState = !turnState;
-      (turnState)
-          ? animationController.forward()
-          : animationController.reverse();
-
-      widget.onChanged(turnState);
-    });
+      setState(() {
+        if(changeState) {
+          turnState = !turnState;
+        }
+        (turnState)
+            ? animationController.forward()
+            : animationController.reverse();
+        if(changeState){
+          widget.onChanged(turnState);
+        }
+      });
   }
 }
 
@@ -333,7 +336,6 @@ class _CustomSwitchVertical extends State<CustomSwitchVertical>
       (turnState)
           ? animationController.forward()
           : animationController.reverse();
-
       widget.onChanged(turnState);
     });
   }

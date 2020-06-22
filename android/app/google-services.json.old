@@ -10,7 +10,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:322529357435:android:2f53847874451e8f9a3cde",
         "android_client_info": {
-          "package_name": "com.example.home_ass"
+          "package_name": "de.nethcon.home_ass"
         }
       },
       "oauth_client": [
@@ -18,39 +18,10 @@
           "client_id": "322529357435-unv9jp6on61c0fct5g24teuu6agml714.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.example.home_ass",
+            "package_name": "de.nethcon.home_ass",
             "certificate_hash": "093cfc832bfd6ad7e163178e720601eac2e8ca29"
           }
         },
-        {
-          "client_id": "322529357435-rcqudqgcrrotivd2p51covcdoeprj2ri.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
-      "api_key": [
-        {
-          "current_key": "AIzaSyDV5vbx3qBuz-_TgX6OTyN7zO1lU6oiz40"
-        }
-      ],
-      "services": {
-        "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "322529357435-rcqudqgcrrotivd2p51covcdoeprj2ri.apps.googleusercontent.com",
-              "client_type": 3
-            }
-          ]
-        }
-      }
-    },
-    {
-      "client_info": {
-        "mobilesdk_app_id": "1:322529357435:android:652739c37e2104729a3cde",
-        "android_client_info": {
-          "package_name": "de.nethcon.home_ass"
-        }
-      },
-      "oauth_client": [
         {
           "client_id": "322529357435-rcqudqgcrrotivd2p51covcdoeprj2ri.apps.googleusercontent.com",
           "client_type": 3

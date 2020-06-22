@@ -2,7 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:home_ass/utils/res/global.dart';
 
-// ignore_for_file: non_constant_identifier_names
 class SingleAddRoutineDevice extends StatefulWidget{
   @override
   _SingleAddRoutineDeviceState createState() => _SingleAddRoutineDeviceState();

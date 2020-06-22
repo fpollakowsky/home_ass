@@ -89,7 +89,7 @@ class GatewayFound extends StatelessWidget{
                       margin: EdgeInsets.only(top: 64),
                       height: 256,
                       decoration: BoxDecoration(
-                        image: DecorationImage(image: AssetImage("lib/assets/success.png"))
+                        image: DecorationImage(image: AssetImage("lib/assets/images/success.png"))
                       ),
                     ),
                   ),
@@ -143,7 +143,7 @@ class GatewayNotFound extends StatelessWidget{
                       margin: EdgeInsets.only(top: 64),
                       height: 256,
                       decoration: BoxDecoration(
-                          image: DecorationImage(image: AssetImage("lib/assets/failure.png"))
+                          image: DecorationImage(image: AssetImage("lib/assets/images/failure.png"))
                       ),
                     ),
                   ),

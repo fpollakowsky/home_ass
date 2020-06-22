@@ -17,7 +17,7 @@ class ProfilePage extends StatefulWidget {
   });
 
   @override
-  _ProfilePage createState() => new _ProfilePage();
+  _ProfilePage createState() => _ProfilePage();
 }
 
 class _ProfilePage extends State<ProfilePage> {

@@ -39,7 +39,7 @@ class _OnBoardGender extends State<OnBoardGender> {
                           height: 48,
                           width:  48,
                           alignment: Alignment.topLeft,
-                          child: Image(image: AssetImage("images/favicon.png"),color: Colors.white,),
+                          child: Image(image: AssetImage("lib/assets/images/favicon.png"),color: Colors.white,),
                         ),
                       ),
                       Expanded(
@@ -90,7 +90,7 @@ class _OnBoardGender extends State<OnBoardGender> {
                                     child: InkWell(
                                       borderRadius: BorderRadius.all(Radius.circular(24)),
                                       onTap: (){
-                                        setValueSharedPref("profilePicture", "images/male_profile.png", "string");
+                                        setValueSharedPref("profilePicture", "lib/assets/images/male_profile.png", "string");
                                         loadProfilePicture().then((val){
                                           setHeroTagOnBoard("profilePicture_1");
                                           Navigator.of(context).push(FadeRouteBuilder(page: EnterPersonalInformation()));
@@ -100,7 +100,7 @@ class _OnBoardGender extends State<OnBoardGender> {
                                         height: 160,
                                         width: 160,
                                         child: Image(
-                                            image: AssetImage("images/male_profile.png")
+                                            image: AssetImage("lib/assets/images/male_profile.png")
                                         ),
                                       ),
                                     ),
@@ -131,7 +131,7 @@ class _OnBoardGender extends State<OnBoardGender> {
                                     child: InkWell(
                                       borderRadius: BorderRadius.all(Radius.circular(24)),
                                       onTap: (){
-                                        setValueSharedPref("profilePicture", "images/woman_profile.png", "string");
+                                        setValueSharedPref("profilePicture", "lib/assets/images/woman_profile.png", "string");
                                         loadProfilePicture().then((val){
                                           setHeroTagOnBoard("profilePicture_2");
                                           Navigator.of(context).push(FadeRouteBuilder(page: EnterPersonalInformation()));
@@ -141,7 +141,7 @@ class _OnBoardGender extends State<OnBoardGender> {
                                         height: 160,
                                         width: 160,
                                         child: Image(
-                                            image: AssetImage("images/woman_profile.png")
+                                            image: AssetImage("lib/assets/images/woman_profile.png")
                                         ),
                                       ),
                                     ),

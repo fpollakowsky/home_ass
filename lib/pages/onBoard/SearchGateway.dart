@@ -59,7 +59,7 @@ class _OnBoardSearchGateway extends State<OnBoardSearchGateway> {
   @override
   void initState() {
     super.initState();
-    pingGatewayTest().then((val){
+    pingGatewayLocal().then((val){
       startTimeout();
     });
   }
