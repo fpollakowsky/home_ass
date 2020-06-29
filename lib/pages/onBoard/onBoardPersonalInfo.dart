@@ -2,16 +2,16 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_villains/villain.dart';
-import 'package:home_ass/pages/onBoard/SearchGateway.dart';
+import 'package:home_ass/pages/onBoard/onBoardSearch.dart';
 import 'package:home_ass/utils/res/colors.dart';
 import 'package:home_ass/utils/res/global.dart';
 import 'package:home_ass/utils/res/transitions.dart';
 
-class EnterPersonalInformation extends StatefulWidget{
-  _EnterPersonalInformation createState() => _EnterPersonalInformation();
+class OnBoardPersonalInfo extends StatefulWidget{
+  _OnBoardPersonalInfo createState() => _OnBoardPersonalInfo();
 }
 
-class _EnterPersonalInformation extends State<EnterPersonalInformation> {
+class _OnBoardPersonalInfo extends State<OnBoardPersonalInfo> {
   final formKeyPI  = GlobalKey<FormState>();
 
   @override
@@ -141,7 +141,7 @@ class _EnterPersonalInformation extends State<EnterPersonalInformation> {
                                 if (formKeyPI.currentState.validate()) {
                                   formKeyPI.currentState.save();
                                   loadSharedPreferences().then((val){
-                                    Navigator.of(context).push(FadeRouteBuilder(page: OnBoardSearchGateway()));
+                                    Navigator.of(context).push(FadeRouteBuilder(page: OnBoardSearch()));
                                   });
                                 }
                               },

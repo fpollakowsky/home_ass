@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:flutter_villains/villain.dart';
-import 'package:home_ass/pages/onBoard/3.dart';
+import 'package:home_ass/pages/onBoard/onBoardGateway.dart';
 import 'package:home_ass/utils/res/colors.dart';
 import 'package:home_ass/utils/res/transitions.dart';
 import 'package:ping_discover_network/ping_discover_network.dart';
@@ -21,7 +21,7 @@ class _E101 extends State<E101> {
 
   startTimeout([int milliseconds]) {
     Timer(Duration(seconds: 5), () {
-      Navigator.of(context).push(FadeRouteBuilder(page: OnBoardThird()));
+      Navigator.of(context).push(FadeRouteBuilder(page: OnBoardGateway()));
     });
   }
 

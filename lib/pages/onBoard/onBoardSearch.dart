@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:flutter_villains/villain.dart';
-import 'package:home_ass/pages/onBoard/3.dart';
+import 'package:home_ass/pages/onBoard/onBoardGateway.dart';
 import 'package:home_ass/utils/res/colors.dart';
 import 'package:home_ass/utils/res/transitions.dart';
 import 'package:ping_discover_network/ping_discover_network.dart';
@@ -13,15 +13,15 @@ import 'package:home_ass/utils/res/global.dart';
 
 Timer timer;
 
-class OnBoardSearchGateway extends StatefulWidget{
-  _OnBoardSearchGateway createState() => _OnBoardSearchGateway();
+class OnBoardSearch extends StatefulWidget{
+  _OnBoardSearch createState() => _OnBoardSearch();
 }
 
-class _OnBoardSearchGateway extends State<OnBoardSearchGateway> {
+class _OnBoardSearch extends State<OnBoardSearch> {
 
   startTimeout([int milliseconds]) {
     Timer(Duration(seconds: 5), () {
-      Navigator.of(context).push(FadeRouteBuilder(page: OnBoardThird()));
+      Navigator.of(context).push(FadeRouteBuilder(page: OnBoardGateway()));
     });
   }
 
@@ -154,15 +154,6 @@ class _OnBoardSearchGateway extends State<OnBoardSearchGateway> {
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.all(Radius.circular(16))
                         ),
-                        child: Text(
-                          "Searching for devices",
-                          style: TextStyle(
-                            fontSize: 16,
-                            fontWeight:
-                            FontWeight.bold,
-                            color: Colors.white
-                          )
-                        )
                       ),
                     )
                   ],

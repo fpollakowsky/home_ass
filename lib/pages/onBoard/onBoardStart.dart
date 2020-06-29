@@ -2,8 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_villains/villain.dart';
-import 'package:home_ass/pages/onBoard/SearchGateway.dart';
-import 'package:home_ass/pages/onBoard/selectGender.dart';
+import 'package:home_ass/pages/onBoard/onBoardSearch.dart';
+import 'package:home_ass/pages/onBoard/onBoardGender.dart';
 import 'package:home_ass/utils/res/colors.dart';
 import 'package:home_ass/utils/res/global.dart';
 import 'package:home_ass/utils/res/transitions.dart';
@@ -12,15 +12,15 @@ void main() {
   runApp(MaterialApp(
     debugShowCheckedModeBanner: false,
     navigatorObservers: [VillainTransitionObserver()],
-    home: OnBoardFirst(),
+    home: OnBoardStart(),
   ));
 }
 
-class OnBoardFirst extends StatefulWidget{
+class OnBoardStart extends StatefulWidget{
   _OnBoardFirst createState() => _OnBoardFirst();
 }
 
-class _OnBoardFirst extends State<OnBoardFirst> {
+class _OnBoardFirst extends State<OnBoardStart> {
   @override
   void initState() {
     super.initState();

@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:home_ass/pages/home/dashboard.dart';
 import 'package:home_ass/pages/home/routines.dart';
 import 'package:home_ass/pages/home/settings.dart';
@@ -24,11 +23,6 @@ class _HomeScreenState extends State<HomeScreen>
   TabController _tabController;
   int _selectedIndex = 1;
   static ScrollController _scrollViewController;
-  List<Widget> _widgetOptions = <Widget>[
-    Routines(),
-    Dashboard2(),
-    Settings()
-  ];
 
   @override
   void initState() {
@@ -53,8 +47,16 @@ class _HomeScreenState extends State<HomeScreen>
 
   @override
   Widget build(BuildContext context) {
+    final int error = widget.error;
+
+    List<Widget> _widgetOptions = <Widget>[
+      Routines(),
+      Dashboard2(error: error,),
+      Settings()
+    ];
+
     return Scaffold(
-      backgroundColor: secondaryColor,
+      //backgroundColor: secondaryColor,
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.shifting,
         unselectedItemColor: Colors.grey,
@@ -76,9 +78,7 @@ class _HomeScreenState extends State<HomeScreen>
         selectedItemColor: primaryColor,
         onTap: _onItemTapped,
       ),
-      body: SafeArea(
-        child: _widgetOptions.elementAt(_selectedIndex),
-      ),
+      body: _widgetOptions.elementAt(_selectedIndex),
     );
   }
 }

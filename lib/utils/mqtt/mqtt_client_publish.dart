@@ -6,7 +6,6 @@
  */
 
 import 'dart:async';
-import 'dart:io';
 import 'dart:math';
 import 'package:mqtt_client/mqtt_client.dart';
 import 'package:mqtt_client/mqtt_server_client.dart';

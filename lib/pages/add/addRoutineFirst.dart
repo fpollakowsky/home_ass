@@ -12,7 +12,7 @@ import 'package:home_ass/components/singleAddRoutineDevice.dart';
 import 'package:home_ass/components/singleRoom.dart';
 import 'package:home_ass/pages/home.dart';
 import 'package:home_ass/pages/home/routines.dart';
-import 'package:home_ass/pages/onBoard/selectGender.dart';
+import 'package:home_ass/pages/onBoard/onBoardGender.dart';
 import 'package:home_ass/utils/mysql/updateRequest.dart';
 import 'package:home_ass/utils/res/colors.dart';
 import 'package:home_ass/utils/res/global.dart';

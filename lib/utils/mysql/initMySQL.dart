@@ -11,9 +11,10 @@ Future<dynamic>getMySQLConnection([int database])async{
 
   /// DEBUG
   if (DEBUG == null){
+    /// Disabled
     //valIP = "85.214.233.67";
-    databaseSensor = "data";
-    databaseGeneral = "ehome-concepts";
+    //String databaseUser = "ehome-concepts";
+    //String databasePassword = "rh2O@4a9";
   }
   /// END
 
@@ -40,7 +41,7 @@ Future<dynamic>getMySQLConnection([int database])async{
     return conn;
   }
   catch(e){
-    DEBUG ?? print("MYSQL:: Connection failure! \n$e");
+    DEBUG ?? print("MYSQL:: Connection failure! \nMYSQL:: $e");
     return "101";
   }
 }

@@ -2,7 +2,6 @@ import 'dart:convert';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:home_ass/pages/error/101.dart';
 import 'package:home_ass/pages/home.dart';
 import 'package:home_ass/utils/mysql/selectRequests.dart';
 import 'package:home_ass/utils/mysql/initMySQL.dart';
@@ -32,7 +31,6 @@ var routineList = [];
 var addRoutineDevice = [];
 
 initFirstSetup(){
-  setValueSharedPref("firstStart", false,"bool");
   setValueSharedPref("notification", false,"bool");
   setValueSharedPref("darkmode", false,"bool");
   setValueSharedPref("fingerprint", false,"bool");
@@ -237,6 +235,9 @@ String getDeviceImage(row){
     case "fan":
       break;
     case "speaker":
+      break;
+    default:
+      return "201";
       break;
   }
 }

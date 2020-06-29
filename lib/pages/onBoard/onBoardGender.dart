@@ -2,8 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_villains/villain.dart';
-import 'package:home_ass/pages/onBoard/SearchGateway.dart';
-import 'package:home_ass/pages/onBoard/enterPersonalInformation.dart';
+import 'package:home_ass/pages/onBoard/onBoardSearch.dart';
+import 'package:home_ass/pages/onBoard/onBoardPersonalInfo.dart';
 import 'package:home_ass/utils/res/colors.dart';
 import 'package:home_ass/utils/res/global.dart';
 import 'package:home_ass/utils/res/transitions.dart';
@@ -93,7 +93,7 @@ class _OnBoardGender extends State<OnBoardGender> {
                                         setValueSharedPref("profilePicture", "lib/assets/images/male_profile.png", "string");
                                         loadProfilePicture().then((val){
                                           setHeroTagOnBoard("profilePicture_1");
-                                          Navigator.of(context).push(FadeRouteBuilder(page: EnterPersonalInformation()));
+                                          Navigator.of(context).push(FadeRouteBuilder(page: OnBoardPersonalInfo()));
                                         });
                                       },
                                       child: Container(
@@ -134,7 +134,7 @@ class _OnBoardGender extends State<OnBoardGender> {
                                         setValueSharedPref("profilePicture", "lib/assets/images/woman_profile.png", "string");
                                         loadProfilePicture().then((val){
                                           setHeroTagOnBoard("profilePicture_2");
-                                          Navigator.of(context).push(FadeRouteBuilder(page: EnterPersonalInformation()));
+                                          Navigator.of(context).push(FadeRouteBuilder(page: OnBoardPersonalInfo()));
                                         });
                                       },
                                       child: Container(

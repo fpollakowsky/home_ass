@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_villains/villains/villains.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:home_ass/pages/onBoard/onBoardFirst.dart';
+import 'package:home_ass/pages/onBoard/onBoardStart.dart';
 import 'package:home_ass/utils/res/colors.dart';
 import 'package:home_ass/utils/res/global.dart';
 
@@ -31,7 +31,7 @@ class _SplashScreen extends State<SplashScreen> {
     Timer(Duration(milliseconds: 1500), () {
       if (valFirstStart == null){
         initFirstSetup();
-        Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => OnBoardFirst()));
+        Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => OnBoardStart()));
       }
       else{
         initDashboard(context, true);
